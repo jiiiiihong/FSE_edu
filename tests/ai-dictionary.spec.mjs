@@ -6,20 +6,18 @@ test('AI FAB opens and Escape closes modal',async({page})=>{
  await page.keyboard.press('Escape');
  await expect(page.getByRole('dialog',{name:'AI 기술사전'})).toBeHidden();
 });
-test('unconfigured endpoint does not call paid API',async({page})=>{
+test('configured endpoint requires verification and never calls paid API when verification fails',async({page})=>{
+ let apiCalls=0;
+ await page.route('https://fse-gear-dictionary-api.kimjihong789.workers.dev/**',async route=>{apiCalls++;await route.fulfill({status:500,body:'unexpected API call'});});
+ await page.evaluate(()=>{window.FSE_GET_TURNSTILE_TOKEN=async()=>{throw Error('보안 인증 실패')};});
  await page.getByRole('button',{name:'통합 기술 사전 검색'}).click();
  await page.getByRole('textbox',{name:'기술 용어'}).fill('Backlash');
  await page.getByRole('button',{name:'AI 검색'}).click();
- await expect(page.locator('.ai14-status')).toContainText('아직 연결되지 않았습니다');
+ await expect(page.locator('.ai14-status')).toContainText('보안 인증 실패');
+ expect(apiCalls).toBe(0);
 });
 test('mocked AI response saves, survives reload and supports review',async({page})=>{
- await page.addInitScript(()=>{
-  window.FSE_AI_ENDPOINT='https://example.invalid/api';
-
-  const nativeFetch=window.fetch.bind(window);
-  window.fetch=(url,opts)=>String(url)==='https://example.invalid/api'?Promise.resolve(new Response(JSON.stringify({result:{term:'Backlash',korean:'백래시',summary:'기어 유격',definition:'치면 간극',understanding:'방향 전환 유격',principle:'맞물림 원리',importance:'소음과 정밀도',fieldExample:'Check backlash.',translation:'백래시를 확인하세요.',related:['Gear'],caveat:'실제 매뉴얼 확인'}}),{status:200,headers:{'Content-Type':'application/json'}})):nativeFetch(url,opts);
- });
- await page.goto('/');
+ await page.route('https://fse-gear-dictionary-api.kimjihong789.workers.dev/**',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({result:{term:'Backlash',korean:'백래시',summary:'기어 유격',definition:'치면 간극',understanding:'방향 전환 유격',principle:'맞물림 원리',importance:'소음과 정밀도',fieldExample:'Check backlash.',translation:'백래시를 확인하세요.',related:['Gear'],caveat:'실제 매뉴얼 확인'}})}));
  await page.evaluate(()=>{window.FSE_GET_TURNSTILE_TOKEN=async()=>'mock-token'});
  await page.getByRole('button',{name:'통합 기술 사전 검색'}).click();
  await page.getByRole('textbox',{name:'기술 용어'}).fill('Backlash');
