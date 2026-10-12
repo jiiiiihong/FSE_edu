@@ -28,6 +28,39 @@ const endpoint=window.FSE_AI_ENDPOINT;if(!endpoint){status.textContent="AI 서�
 const getToken=window.FSE_GET_TURNSTILE_TOKEN;if(typeof getToken!=="function"){status.textContent="보안 인증이 구성되지 않았습니다.";return}
 submit.disabled=true;status.textContent="AI 해설 생성 중...";
 try{const token=await getToken();const response=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({term,turnstileToken:token})});if(!response.ok)throw Error("서버 오류 "+response.status);const data=await response.json();if(!data.result||typeof data.result.term!=="string")throw Error("응답 형식 오류");display(data.result);status.textContent="AI 생성 결과입니다. 실제 장비 설정은 매뉴얼과 대조하세요."}catch(err){status.textContent="검색 실패: "+safe(err.message,120)}finally{submit.disabled=false}};
+
+// Public Turnstile site key only. Secrets stay in Cloudflare Worker settings.
+// A callback is supplied to the AI search screen; the API endpoint remains disabled until approved.
+const TURNSTILE_SITE_KEY="0x4AAAAAAFUajcjDlrVxMABK";
+let turnstileLoader=null;
+function loadTurnstile(){
+ if(window.turnstile)return Promise.resolve(window.turnstile);
+ if(turnstileLoader)return turnstileLoader;
+ turnstileLoader=new Promise((resolve,reject)=>{
+  const script=document.createElement("script");
+  script.src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+  script.async=true;script.defer=true;
+  script.onload=()=>window.turnstile?resolve(window.turnstile):reject(Error("Turnstile unavailable"));
+  script.onerror=()=>reject(Error("Turnstile load failed"));
+  document.head.append(script);
+ }).catch(e=>{turnstileLoader=null;throw e});
+ return turnstileLoader;
+}
+window.FSE_GET_TURNSTILE_TOKEN=async()=>{
+ const api=await loadTurnstile();
+ return new Promise((resolve,reject)=>{
+  const holder=document.createElement("div");
+  holder.className="ai14-turnstile";
+  holder.setAttribute("aria-label","보안 인증");
+  sheet.insertBefore(holder,status);
+  let widgetId,done=false;
+  const cleanup=()=>{try{if(widgetId!==undefined)api.remove(widgetId)}catch{}holder.remove()};
+  const finish=(err,token)=>{if(done)return;done=true;cleanup();if(err)reject(err);else resolve(token)};
+  try{widgetId=api.render(holder,{sitekey:TURNSTILE_SITE_KEY,callback:token=>finish(null,token),"error-callback":()=>finish(Error("보안 인증 실패")),"expired-callback":()=>finish(Error("인증 만료"))})}
+  catch(e){finish(e)}
+ });
+};
+
 const fab=el("button","ai14-fab","AI 사전");fab.type="button";fab.setAttribute("aria-label","AI 기술사전 검색");fab.onclick=open;document.body.append(fab);
 const style=el("style");style.textContent=`.ai14-fab{position:fixed;right:16px;bottom:calc(94px + env(safe-area-inset-bottom));z-index:80;border-radius:30px;padding:12px 16px;background:#2769cc;color:white;border:2px solid #a5c6ff;box-shadow:0 3px 18px #0008}.ai14-overlay[hidden]{display:none!important}.ai14-overlay{position:fixed;inset:0;z-index:500;background:#000b;display:flex;align-items:stretch;justify-content:center}.ai14-sheet{background:#15253a;color:#f1f5ff;width:min(100%,780px);overflow:auto;padding:calc(18px + env(safe-area-inset-top)) 18px calc(24px + env(safe-area-inset-bottom));font-size:16px}.ai14-bar,.ai14-tabs,.ai14-search{display:flex;align-items:center;gap:10px;justify-content:space-between;margin-bottom:18px}.ai14-search input{min-width:0;flex:1;padding:12px;background:#fff;color:#111;border-radius:8px}.ai14-sheet button{cursor:pointer}.ai14-sheet h2{font-size:28px}.ai14-sheet h3{margin-top:24px;font-size:19px}.ai14-sheet p{line-height:1.7;white-space:pre-wrap}.ai14-item{padding:12px;border-bottom:1px solid #52647c;display:grid;gap:10px}.ai14-item textarea{width:100%;min-height:65px}.ai14-notice{font-size:13px;color:#b7c5d8}.ai14-open{overflow:hidden}`;document.head.append(style);
 })();
