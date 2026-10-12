@@ -131,3 +131,52 @@ test('runtime exceptions absent across all tabs',async ({page})=>{
  }
  expect(errors).toEqual([]);
 });
+
+test('every DUMPE phase is present in every chapter',async ({page})=>{
+ const labels=['D · Definition','U · Understanding','M · Memorization','P · Practice','E · Expansion'];
+ const units=page.locator('details[data-unit]');
+ await expect(units).toHaveCount(7);
+ for(let i=0;i<7;i++){
+  const unit=units.nth(i);
+  await unit.locator('summary').first().click();
+  for(const label of labels) await expect(unit.getByText(label,{exact:true})).toBeVisible();
+  await expect(unit.locator('button[data-openquiz]')).toBeVisible();
+ }
+});
+test('all 58 glossary cards open and reveal their definitions',async ({page})=>{
+ const expected=[8,9,8,9,8,8,8];
+ const units=page.locator('details[data-unit]');
+ let total=0;
+ for(let i=0;i<7;i++){
+  const unit=units.nth(i);
+  await unit.locator('summary').first().click();
+  const cards=unit.locator('details.term');
+  await expect(cards).toHaveCount(expected[i]);
+  for(let j=0;j<expected[i];j++){
+   const card=cards.nth(j);
+   await card.locator('summary').click();
+   await expect(card).toHaveAttribute('open','');
+   await expect(card.locator('p')).not.toBeEmpty();
+   total++;
+  }
+ }
+ expect(total).toBe(58);
+});
+test('all 36 quiz questions have visible choices and grading feedback',async ({page})=>{
+ await page.locator('nav button[data-tab="quiz"]').click();
+ const seen=new Set();
+ for(let unit=0;unit<7;unit++){
+  await page.locator('#unitSelect').selectOption(String(unit));
+  const questions=page.locator('[data-q]').filter({has:page.locator('[data-choice]')});
+  const ids=await page.locator('button[data-q][data-choice]').evaluateAll(els=>[...new Set(els.map(e=>e.dataset.q))]);
+  expect(ids.length).toBeGreaterThan(0);
+  for(const id of ids){
+   seen.add(id);
+   const choices=page.locator('button[data-q="'+id+'"][data-choice]');
+   await expect(choices).toHaveCount(3);
+   await choices.first().click();
+   await expect(page.locator('#ex'+id)).toContainText(/정답|오답/);
+  }
+ }
+ expect(seen.size).toBe(36);
+});
