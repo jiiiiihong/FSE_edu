@@ -5,6 +5,7 @@ on:
       - feature/agent-verification-v1-2
       - feature/dictionary-v1-3
       - feature/ai-dictionary-v1-4
+      - feature/mobile-dictionary-v1-4-1
   workflow_dispatch:
 permissions:
   contents: read
