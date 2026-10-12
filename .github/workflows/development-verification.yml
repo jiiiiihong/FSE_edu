@@ -7,6 +7,7 @@ on:
       - feature/ai-dictionary-v1-4
       - feature/mobile-dictionary-v1-4-1
       - feature/ai-worker-connect-v1-4-2
+      - feature/worker-diagnostics-v1-4-3
   workflow_dispatch:
 permissions:
   contents: read
@@ -27,6 +28,8 @@ jobs:
           node --check dictionary.js
           node --check ai-dictionary.js
           node --check worker/ai-dictionary.js
+          node --check tests/worker-diagnostics.test.mjs
+          node --test tests/worker-diagnostics.test.mjs
           node --check tests/ai-dictionary.spec.mjs
           npm run test:syntax
       - name: Verify local references
