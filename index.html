@@ -43,4 +43,4 @@ document.addEventListener("click",e=>{let t=e.target.closest("button");if(!t)ret
 document.addEventListener("change",e=>{if(e.target.id==="unitSelect"){quizUnit=+e.target.value;quiz();return}if(e.target.dataset.done){done[e.target.dataset.done]=e.target.checked;put("done",done);let unit=e.target.closest("details");openUnit=unit?+unit.dataset.unit:-1;home()}});
 document.addEventListener("toggle",e=>{if(e.target.matches&&e.target.matches("details[data-unit]")&&e.target.open)openUnit=+e.target.dataset.unit},true);
 $("status").textContent="기어공학 심화 v4.0 · 기능 실행 정상 ✓";render();
-</script><script src="dictionary.js" defer></script><script src="ai-dictionary.js" defer></script></body></html>
+</script><script src="dictionary.js" defer></script><script>window.FSE_AI_ENDPOINT="https://fse-gear-dictionary-api.kimjihong789.workers.dev";</script><script src="ai-dictionary.js" defer></script></body></html>

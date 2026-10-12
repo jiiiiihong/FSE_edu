@@ -6,6 +6,7 @@ on:
       - feature/dictionary-v1-3
       - feature/ai-dictionary-v1-4
       - feature/mobile-dictionary-v1-4-1
+      - feature/ai-worker-connect-v1-4-2
   workflow_dispatch:
 permissions:
   contents: read
