@@ -1,4 +1,15 @@
 import { test, expect } from '@playwright/test';
+async function openTab(page,tab){
+ if(['quiz','cases','notes'].includes(tab)){
+  await page.locator('nav .fse-more').click();
+  const index={quiz:0,cases:1,notes:2}[tab];
+  await page.locator('#fse-more-menu button').nth(index).click();
+  await expect(page.locator('nav [data-tab="'+tab+'"]')).toHaveClass(/active/);
+ }else{
+  await page.locator('nav [data-tab="'+tab+'"]').click();
+ }
+}
+
 test.beforeEach(async ({page})=>{
  await page.goto('/');
  await expect(page.locator('#app')).not.toContainText('학습 자료를 불러오는 중입니다.');
@@ -22,7 +33,7 @@ test('all seven chapters open and DUMPE content exists',async ({page})=>{
  }
 });
 test('quiz answers update feedback and score',async ({page})=>{
- await page.locator('nav button[data-tab="quiz"]').click();
+ await openTab(page,'quiz');
  await expect(page.locator('[data-q]').first()).toBeVisible();
  await page.locator('[data-q="0"][data-choice="1"]').click();
  await expect(page.locator('#ex0')).toContainText('정답');
@@ -31,7 +42,7 @@ test('quiz answers update feedback and score',async ({page})=>{
  await expect(page.locator('#ex0')).toContainText('오답');
 });
 test('calculator gives correct result and rejects invalid inputs',async ({page})=>{
- await page.locator('nav button[data-tab="calc"]').click();
+ await openTab(page,'calc');
  await page.locator('#mn').fill('2');await page.locator('#z').fill('40');
  await page.locator('#beta').fill('0');await page.locator('#alpha').fill('20');
  await page.locator('#calculate').click();
@@ -40,7 +51,7 @@ test('calculator gives correct result and rejects invalid inputs',async ({page})
  await expect(page.locator('#result')).toContainText('입력값을 확인하세요');
 });
 test('all eight calculation exercises grade correctly',async ({page})=>{
- await page.locator('nav button[data-tab="cases"]').click();
+ await openTab(page,'cases');
  const values=['80','6.283','69.282','60','40','150.796','0.04','300'];
  for(let i=0;i<values.length;i++){
   await page.locator('#case'+i).fill(values[i]);
@@ -49,16 +60,16 @@ test('all eight calculation exercises grade correctly',async ({page})=>{
  }
 });
 test('notes can be saved and restored',async ({page})=>{
- await page.locator('nav button[data-tab="notes"]').click();
+ await openTab(page,'notes');
  await page.locator('#memo').fill('verification sample');
  await page.locator('#saveMemo').click();
- await page.reload();await page.locator('nav button[data-tab="notes"]').click();
+ await page.reload();await openTab(page,'notes');
  await expect(page.locator('#memo')).toHaveValue('verification sample');
 });
 
 test('chapter quiz navigation and answer persistence',async ({page})=>{
  for(let unit=0;unit<7;unit++){
-  await page.locator('nav button[data-tab="home"]').click();
+  await openTab(page,'home');
   const d=page.locator('details[data-unit]').nth(unit);
   await d.locator('summary').first().click();
   await d.locator('button[data-openquiz]').click();
@@ -68,11 +79,11 @@ test('chapter quiz navigation and answer persistence',async ({page})=>{
  await page.locator('#unitSelect').selectOption('0');
  await page.locator('[data-q="0"][data-choice="1"]').click();
  await expect(page.locator('#ex0')).toContainText('정답');
- await page.reload();await page.locator('nav button[data-tab="quiz"]').click();
+ await page.reload();await openTab(page,'quiz');
  await expect(page.locator('#ex0')).toContainText('정답');
 });
 test('quiz scoring counts correct, incorrect and completed answers',async ({page})=>{
- await page.locator('nav button[data-tab="quiz"]').click();
+ await openTab(page,'quiz');
  const ids=await page.locator('button[data-q]').evaluateAll(els=>[...new Set(els.map(e=>e.dataset.q))]);
  await expect(page.locator('#score')).toContainText('단원 풀이 0/');
  for(const id of ids){
@@ -83,7 +94,7 @@ test('quiz scoring counts correct, incorrect and completed answers',async ({page
  await expect(page.locator('#score')).toContainText('점');
 });
 test('calculator independently verified geometry and boundaries',async ({page})=>{
- await page.locator('nav button[data-tab="calc"]').click();
+ await openTab(page,'calc');
  await page.locator('#mn').fill('2');await page.locator('#z').fill('30');
  await page.locator('#beta').fill('30');await page.locator('#alpha').fill('20');
  await page.locator('#calculate').click();
@@ -100,7 +111,7 @@ test('calculator independently verified geometry and boundaries',async ({page})=
  }
 });
 test('exercise incorrect and blank values rejected',async ({page})=>{
- await page.locator('nav button[data-tab="cases"]').click();
+ await openTab(page,'cases');
  await page.locator('button[data-check="0"]').click();
  await expect(page.locator('#caseResult0')).toContainText('다시 확인');
  await page.locator('#case0').fill('79');
@@ -120,14 +131,14 @@ test('mobile layout avoids horizontal overflow and navigation remains operable',
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+1);
  expect(overflow).toBe(false);
  for(const tab of ['home','calc','quiz','cases','notes']){
-  await page.locator('nav button[data-tab="'+tab+'"]').click();
-  await expect(page.locator('nav button[data-tab="'+tab+'"]')).toHaveClass(/active/);
+  await openTab(page,tab);
+  await expect(page.locator('nav [data-tab="'+tab+'"]')).toHaveClass(/active/);
  }
 });
 test('runtime exceptions absent across all tabs',async ({page})=>{
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  for(const tab of ['home','calc','quiz','cases','notes']){
-  await page.locator('nav button[data-tab="'+tab+'"]').click();
+  await openTab(page,tab);
  }
  expect(errors).toEqual([]);
 });
@@ -163,7 +174,7 @@ test('all 58 glossary cards open and reveal their definitions',async ({page})=>{
  expect(total).toBe(58);
 });
 test('all 36 quiz questions have visible choices and grading feedback',async ({page})=>{
- await page.locator('nav button[data-tab="quiz"]').click();
+ await openTab(page,'quiz');
  const seen=new Set();
  for(let unit=0;unit<7;unit++){
   await page.locator('#unitSelect').selectOption(String(unit));

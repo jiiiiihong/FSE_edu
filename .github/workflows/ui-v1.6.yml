@@ -1,0 +1,24 @@
+name: FSE v1.6 UI checks
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'ai-dictionary.js'
+      - 'dictionary.js'
+      - 'navigation-v1.6.js'
+      - 'ui-v1.6.css'
+      - 'scripts/**'
+      - '.github/workflows/ui-v1.6.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ui-static:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/check-syntax.mjs
+      - run: node scripts/check-ui-v1.6.mjs
