@@ -36,7 +36,7 @@ test('dictionary memo, review, delete and export controls',async({page})=>{
  await expect(page.getByRole('button',{name:'JSON 백업'})).toBeVisible();
  page.once('dialog',d=>d.accept());
  await page.locator('#dictShelfList button').filter({hasText:'삭제'}).first().click();
- await expect(page.locator('#dictShelfList')).toContainText('저장된 용어가 없습니다');
+ await expect(page.locator('#dictShelfList')).toContainText('저장된 기본 용어가 없습니다.');
 });
 test('floating button only on learning tab and popup closes with escape',async({page})=>{
  await page.locator('#dictFab').click();await page.getByRole('button',{name:'기본 사전 검색'}).click();await page.keyboard.press('Escape');
