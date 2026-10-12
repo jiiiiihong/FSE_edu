@@ -15,11 +15,12 @@ test('unconfigured endpoint does not call paid API',async({page})=>{
 test('mocked AI response saves, survives reload and supports review',async({page})=>{
  await page.addInitScript(()=>{
   window.FSE_AI_ENDPOINT='https://example.invalid/api';
-  window.FSE_GET_TURNSTILE_TOKEN=async()=>'mock-token';
+
   const nativeFetch=window.fetch.bind(window);
   window.fetch=(url,opts)=>String(url)==='https://example.invalid/api'?Promise.resolve(new Response(JSON.stringify({result:{term:'Backlash',korean:'백래시',summary:'기어 유격',definition:'치면 간극',understanding:'방향 전환 유격',principle:'맞물림 원리',importance:'소음과 정밀도',fieldExample:'Check backlash.',translation:'백래시를 확인하세요.',related:['Gear'],caveat:'실제 매뉴얼 확인'}}),{status:200,headers:{'Content-Type':'application/json'}})):nativeFetch(url,opts);
  });
  await page.goto('/');
+ await page.evaluate(()=>{window.FSE_GET_TURNSTILE_TOKEN=async()=>'mock-token'});
  await page.getByRole('button',{name:'AI 기술사전 검색'}).click();
  await page.getByRole('textbox',{name:'기술 용어'}).fill('Backlash');
  await page.getByRole('button',{name:'AI 검색'}).click();
