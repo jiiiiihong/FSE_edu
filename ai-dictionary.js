@@ -16,11 +16,24 @@ const hide=()=>{root.hidden=true;document.body.classList.remove("ai14-open");pre
 close.onclick=hide;root.addEventListener("click",e=>{if(e.target===root)hide()});document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!root.hidden)hide()});
 searchTab.onclick=()=>showTab("search");savedTab.onclick=()=>showTab("saved");
 function store(){try{localStorage.setItem(KEY,JSON.stringify(saved));return true}catch{status.textContent="저장 공간이 부족하거나 브라우저 저장이 차단되었습니다.";return false}}
-function display(item){result.replaceChildren();const h=el("h2","",safe(item.term,120));result.append(h,el("p","",safe(item.korean,200)+" · "+safe(item.summary,500)));
-for(const [key,label] of fields){result.append(el("h3","",label),el("p","",safe(item[key])))}
-result.append(el("h3","","6. 관련 용어"),el("p","",Array.isArray(item.related)?item.related.map(x=>safe(x,100)).join(" · "):""));
-result.append(el("p","ai14-notice","AI 생성 정보입니다. 기술 도식 및 수치는 검증된 출처가 제공될 때만 표시합니다."));
-const save=el("button","","상세 해설 저장");save.onclick=()=>{const entry={...item,term:safe(item.term,120),savedAt:new Date().toISOString(),memo:"",reviewed:false};const n=saved.findIndex(x=>x.term.toLowerCase()===entry.term.toLowerCase());if(n>=0){status.textContent="이미 저장된 용어입니다. 기존 메모를 보호하기 위해 덮어쓰지 않았습니다.";return}if(saved.length>=300){status.textContent="용어장 최대 300개입니다.";return}saved.unshift(entry);if(store())status.textContent="상세 해설을 저장했습니다."};result.append(save)}
+function display(item){
+result.replaceChildren();
+const hero=el("section","ai16-hero"),eyebrow=el("span","ai16-eyebrow","ENGINEERING REFERENCE"),heading=el("h2","",safe(item.term,120)),korean=el("p","ai16-korean",safe(item.korean,200));
+const summary=el("div","ai16-summary");summary.append(el("strong","","핵심 요약"),el("p","",safe(item.summary,1000)));
+hero.append(eyebrow,heading,korean,summary);
+const save=el("button","ai16-save","상세 해설 저장");save.type="button";
+const already=()=>saved.some(x=>x.term.toLowerCase()===String(item.term).toLowerCase());
+const markSaved=()=>{save.textContent=already()?"✓ 내 용어장에 저장됨":"☆ 상세 해설 저장";save.disabled=already()};
+save.onclick=()=>{const entry={...item,term:safe(item.term,120),savedAt:new Date().toISOString(),memo:"",reviewed:false};if(already()){status.textContent="이미 저장된 용어입니다.";return}if(saved.length>=300){status.textContent="용어장 최대 300개입니다.";return}saved.unshift(entry);if(store()){status.textContent="상세 해설을 저장했습니다.";markSaved()}else saved.shift()};
+markSaved();hero.append(save);result.append(hero);
+const content=el("section","ai16-content");
+const blocks=[["definition","전문 정의 (Definition)"],["understanding","쉬운 설명 (Understanding)"],["principle","기술 원리"],["importance","왜 중요한가?"],["fieldExample","현장 영어 예문"],["translation","한국어 번역"],["related","관련 용어"],["caveat","주의사항"]];
+for(const [key,label] of blocks){const raw=key==="related"?(Array.isArray(item.related)?item.related.map(x=>safe(x,100)).join(" · "):""):safe(item[key],2500);if(!raw.trim())continue;
+const detail=el("details","ai16-section"),summaryEl=el("summary","",label),paragraph=el("p","",raw);
+if(key==="definition"||key==="understanding")detail.open=true;
+detail.append(summaryEl,paragraph);content.append(detail)}
+result.append(content,el("p","ai14-notice","AI 생성 정보입니다. 실제 장비 설정과 수치는 공식 매뉴얼로 검증하세요."));
+}
 function drawShelf(){shelf.replaceChildren();const h=el("h2","","내 AI 용어장");shelf.append(h);let old=[];try{old=JSON.parse(localStorage.getItem(OLD)||"null")?.entries||[]}catch{};shelf.append(el("p","ai14-notice",`v1.3 용어장 ${Array.isArray(old)?old.length:0}개는 기존 저장소에 그대로 보존됩니다.`));
 for(const item of saved){const row=el("div","ai14-item"),btn=el("button","",safe(item.term,120));btn.onclick=()=>{showTab("search");input.value=item.term;display(item)};row.append(btn);const memo=el("textarea");memo.value=safe(item.memo,2000);memo.placeholder="개인 메모";memo.setAttribute("aria-label",item.term+" 개인 메모");memo.onchange=()=>{item.memo=safe(memo.value,2000);store()};row.append(memo);const check=el("label"),tick=el("input");tick.type="checkbox";tick.checked=item.reviewed===true;tick.onchange=()=>{item.reviewed=tick.checked;store()};check.append(tick,document.createTextNode(" 복습 완료"));row.append(check);const del=el("button","","삭제");del.onclick=()=>{if(confirm(item.term+" 삭제할까요?")){saved=saved.filter(x=>x!==item);store();drawShelf()}};row.append(del);shelf.append(row)}}
 form.onsubmit=async e=>{e.preventDefault();const term=input.value.trim();if(!term)return;const existing=saved.find(x=>x.term.toLowerCase()===term.toLowerCase());if(existing){display(existing);status.textContent="저장된 해설을 표시했습니다.";return}
