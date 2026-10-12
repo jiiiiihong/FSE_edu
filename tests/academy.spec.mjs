@@ -1,4 +1,15 @@
 import { test, expect } from '@playwright/test';
+async function openTab(page,tab){
+ if(['quiz','cases','notes'].includes(tab)){
+  await page.locator('nav .fse-more').click();
+  const index={quiz:0,cases:1,notes:2}[tab];
+  await page.locator('#fse-more-menu button').nth(index).click();
+  await expect(page.locator('nav [data-tab="'+tab+'"]')).toHaveClass(/active/);
+ }else{
+  await page.locator('nav [data-tab="'+tab+'"]').click();
+ }
+}
+
 test.beforeEach(async ({page})=>{
  await page.goto('/');
  await expect(page.locator('#app')).not.toContainText('학습 자료를 불러오는 중입니다.');
