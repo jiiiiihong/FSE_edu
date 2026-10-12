@@ -1,0 +1,69 @@
+name: Development verification (no deployment)
+on:
+  push:
+    branches:
+      - feature/agent-verification-v1-2
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  syntax-and-static:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript and HTML structural checks
+        run: |
+          node --check scripts/check-syntax.mjs
+          node --check playwright.config.mjs
+          node --check tests/academy.spec.mjs
+          npm run test:syntax
+      - name: Verify local references
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib.parse import urlsplit
+          class Validator(HTMLParser):
+              def __init__(self):
+                  super().__init__(); self.missing=[]
+              def handle_starttag(self,tag,attrs):
+                  d=dict(attrs)
+                  for attr in ('src','href'):
+                      val=d.get(attr,'')
+                      if not val or val.startswith(('#','data:','mailto:','tel:','javascript:')): continue
+                      parsed=urlsplit(val)
+                      if parsed.scheme or parsed.netloc: continue
+                      path=Path(parsed.path.lstrip('/'))
+                      if str(path) and not path.exists(): self.missing.append(str(path))
+          p=Validator();p.feed(Path('index.html').read_text(encoding='utf-8'))
+          assert not p.missing, f'Missing referenced files: {p.missing}'
+          print('PASS: HTML parsed and referenced local files exist')
+          PY
+
+  browser-e2e:
+    runs-on: ubuntu-latest
+    needs: syntax-and-static
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install test dependencies
+        run: npm install --no-audit --no-fund
+      - name: Install Chromium and OS dependencies
+        run: npx playwright install --with-deps chromium
+      - name: Run real-browser desktop and mobile tests
+        run: npm run test:e2e
+      - name: Upload browser test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-evidence
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: warn
+          retention-days: 14
