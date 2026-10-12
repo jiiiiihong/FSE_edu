@@ -7,7 +7,7 @@ let saved=[];try{const x=JSON.parse(localStorage.getItem(KEY)||"[]");if(Array.is
 const el=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e};
 const root=el("section","ai14-overlay");root.hidden=true;root.setAttribute("role","dialog");root.setAttribute("aria-modal","true");root.setAttribute("aria-label","AI 기술사전");
 const sheet=el("div","ai14-sheet"),bar=el("div","ai14-bar"),title=el("strong","","AI Engineering Dictionary"),close=el("button","","닫기");close.type="button";bar.append(title,close);
-const form=el("form","ai14-search"),input=el("input"),submit=el("button","","AI 검색");input.placeholder="예: Backlash";input.maxLength=120;input.required=true;input.setAttribute("aria-label","기술 용어");form.append(input,submit);
+const form=el("form","ai14-search"),input=el("input"),submit=el("button","","AI 검색");input.placeholder="예: Backlash";input.maxLength=120;input.required=true;input.setAttribute("aria-label","기술 용어");const modelLabel=el("label","ai15-model-label","AI 모델"),modelSelect=el("select","ai15-model");modelSelect.setAttribute("aria-label","AI 모델 선택");for(const [id,name] of [["gpt-4.1-mini","GPT-4.1 mini · 경제형"],["gpt-4.1","GPT-4.1 · 고성능"]]){const option=el("option","",name);option.value=id;modelSelect.append(option)}modelLabel.append(modelSelect);try{const preferred=localStorage.getItem("fse_ai_model_v1_5");if([...modelSelect.options].some(o=>o.value===preferred))modelSelect.value=preferred}catch{}modelSelect.onchange=()=>{try{localStorage.setItem("fse_ai_model_v1_5",modelSelect.value)}catch{}};form.append(input,modelLabel,submit);
 const status=el("p","ai14-status","AI 연결 설정 전에는 저장된 용어만 확인할 수 있습니다."),result=el("div","ai14-result"),shelf=el("div","ai14-shelf"),tabs=el("div","ai14-tabs"),searchTab=el("button","","검색"),savedTab=el("button","","내 용어장");
 searchTab.type=savedTab.type="button";tabs.append(searchTab,savedTab);sheet.append(bar,tabs,form,status,result,shelf);root.append(sheet);document.body.append(root);
 let previous=null,active="search";const showTab=t=>{active=t;form.hidden=t!=="search";result.hidden=t!=="search";shelf.hidden=t!=="saved";if(t==="saved")drawShelf()};
@@ -27,7 +27,7 @@ form.onsubmit=async e=>{e.preventDefault();const term=input.value.trim();if(!ter
 const endpoint=window.FSE_AI_ENDPOINT;if(!endpoint){status.textContent="AI 서버가 아직 연결되지 않았습니다. 서버 보안 설정과 배포 승인 후 활성화됩니다.";return}
 const getToken=window.FSE_GET_TURNSTILE_TOKEN;if(typeof getToken!=="function"){status.textContent="보안 인증이 구성되지 않았습니다.";return}
 submit.disabled=true;status.textContent="AI 해설 생성 중...";
-try{const token=await getToken();const response=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({term,turnstileToken:token})});if(!response.ok)throw Error("서버 오류 "+response.status);const data=await response.json();if(!data.result||typeof data.result.term!=="string")throw Error("응답 형식 오류");display(data.result);status.textContent="AI 생성 결과입니다. 실제 장비 설정은 매뉴얼과 대조하세요."}catch(err){status.textContent="검색 실패: "+safe(err.message,120)}finally{submit.disabled=false}};
+try{const token=await getToken();const response=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({term,model:modelSelect.value,turnstileToken:token})});if(!response.ok)throw Error("서버 오류 "+response.status);const data=await response.json();if(!data.result||typeof data.result.term!=="string")throw Error("응답 형식 오류");display(data.result);status.textContent="AI 생성 결과 · "+safe(data.model||modelSelect.value,40)+" · 실제 장비 설정은 매뉴얼과 대조하세요."}catch(err){status.textContent="검색 실패: "+safe(err.message,120)}finally{submit.disabled=false}};
 
 // Public Turnstile site key only. Secrets stay in Cloudflare Worker settings.
 // A callback is supplied to the AI search screen; the API endpoint remains disabled until approved.
@@ -91,5 +91,5 @@ const style=el("style");style.textContent=`.ai14-fab{position:fixed;right:16px;b
  .ai14-search input{padding:12px 10px}
  .ai14-search button{padding:12px 10px}
  .ai14-sheet h2{font-size:23px}
-}`;document.head.append(style);
+}.ai15-model-label{display:flex;flex-direction:column;gap:4px;font-size:12px;white-space:nowrap}.ai15-model{max-width:185px;min-width:0;padding:10px 6px;background:#fff;color:#111;border-radius:8px;font-size:13px}@media(max-width:600px){.ai14-search{flex-wrap:wrap}.ai14-search input{flex-basis:calc(100% - 110px)}.ai15-model-label{order:3;width:100%;flex-direction:row;align-items:center;gap:12px}.ai15-model{max-width:unset;flex:1}}`;document.head.append(style);
 })();
