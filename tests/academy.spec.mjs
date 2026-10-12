@@ -16,7 +16,7 @@ test('all seven chapters open and DUMPE content exists',async ({page})=>{
   await units.nth(i).locator('summary').first().click();
   await expect(units.nth(i).getByText('D · Definition')).toBeVisible();
   await expect(units.nth(i).getByText('E · Expansion')).toBeVisible();
-  await expect(units.nth(i).locator('details.term').first()).toHaveCount(1);
+  await expect(units.nth(i).locator('details.term').first()).toBeVisible();
   await units.nth(i).locator('details.term summary').first().click();
   await expect(units.nth(i).locator('details.term').first()).toHaveAttribute('open','');
  }
