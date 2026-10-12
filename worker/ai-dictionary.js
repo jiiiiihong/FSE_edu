@@ -15,7 +15,7 @@ export default {async fetch(request,env){
  let body;try{body=await request.json()}catch{return reply({error:"Invalid JSON"},400,origin,allowed)}
  const term=typeof body?.term==="string"?body.term.trim():"";
  const requestedModel=typeof body?.model==="string"?body.model:"";
- const allowedModels=["gpt-4.1-mini","gpt-4.1"];
+ const allowedModels=["gpt-6-luna","gpt-4.1-mini","gpt-4.1"];
  if(requestedModel&&!allowedModels.includes(requestedModel))return reply({error:"Unsupported model"},400,origin,allowed);
  const selectedModel=requestedModel||env.OPENAI_MODEL;
  if(!allowedModels.includes(selectedModel))return reply({error:"Model not configured"},503,origin,allowed);
