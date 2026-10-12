@@ -4,6 +4,7 @@ on:
     branches:
       - feature/agent-verification-v1-2
       - feature/dictionary-v1-3
+      - feature/ai-dictionary-v1-4
   workflow_dispatch:
 permissions:
   contents: read
@@ -22,6 +23,9 @@ jobs:
           node --check tests/academy.spec.mjs
           node --check tests/dictionary.spec.mjs
           node --check dictionary.js
+          node --check ai-dictionary.js
+          node --check worker/ai-dictionary.js
+          node --check tests/ai-dictionary.spec.mjs
           npm run test:syntax
       - name: Verify local references
         run: |
