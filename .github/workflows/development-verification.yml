@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - feature/agent-verification-v1-2
+      - feature/dictionary-v1-3
   workflow_dispatch:
 permissions:
   contents: read
@@ -19,6 +20,8 @@ jobs:
           node --check scripts/check-syntax.mjs
           node --check playwright.config.mjs
           node --check tests/academy.spec.mjs
+          node --check tests/dictionary.spec.mjs
+          node --check dictionary.js
           npm run test:syntax
       - name: Verify local references
         run: |
