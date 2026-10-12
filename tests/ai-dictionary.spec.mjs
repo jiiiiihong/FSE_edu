@@ -36,3 +36,21 @@ test('mocked AI response saves, survives reload and supports review',async({page
 });
 
 test('one floating entry and legacy search remain accessible',async({page})=>{await expect(page.locator('.ai14-fab')).toHaveCount(0);await expect(page.locator('#dictFab')).toHaveCount(1);await page.locator('#dictFab').click();await page.getByRole('button',{name:'기본 사전 검색'}).click();await expect(page.locator('#dictOverlay')).toBeVisible();await page.locator('#dictQuery').fill('Backlash');await expect(page.locator('#dictResults')).toContainText('Backlash')});
+
+test('mobile dictionary header buttons remain horizontal and inside viewport',async({page},testInfo)=>{
+ await page.getByRole('button',{name:'통합 기술 사전 검색'}).click();
+ const dialog=page.getByRole('dialog',{name:'AI 기술사전'});
+ await expect(dialog).toBeVisible();
+ const basic=dialog.getByRole('button',{name:'기본 사전 검색'});
+ const close=dialog.getByRole('button',{name:'닫기'});
+ for(const btn of [basic,close]){
+  const metrics=await btn.evaluate(el=>{const r=el.getBoundingClientRect();const st=getComputedStyle(el);return {x:r.x,right:r.right,width:r.width,height:r.height,lineHeight:parseFloat(st.lineHeight),whiteSpace:st.whiteSpace,viewport:document.documentElement.clientWidth}});
+  expect(metrics.x).toBeGreaterThanOrEqual(0);
+  expect(metrics.right).toBeLessThanOrEqual(metrics.viewport+1);
+  expect(metrics.whiteSpace).toBe('nowrap');
+  expect(metrics.height).toBeLessThan(70);
+ }
+ await expect(dialog.getByRole('button',{name:'AI 검색'})).toBeVisible();
+ await basic.click();
+ await expect(page.locator('#dictOverlay')).toBeVisible();
+});
