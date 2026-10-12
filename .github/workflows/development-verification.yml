@@ -42,3 +42,28 @@ jobs:
           assert not p.missing, f'Missing referenced files: {p.missing}'
           print('PASS: HTML parsed and referenced local files exist')
           PY
+
+  browser-e2e:
+    runs-on: ubuntu-latest
+    needs: syntax-and-static
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install test dependencies
+        run: npm install --no-audit --no-fund
+      - name: Install Chromium and OS dependencies
+        run: npx playwright install --with-deps chromium
+      - name: Run real-browser desktop and mobile tests
+        run: npm run test:e2e
+      - name: Upload browser test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-evidence
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: warn
+          retention-days: 14
