@@ -4,6 +4,7 @@ on:
     branches:
       - feature/agent-verification-v1-2
       - feature/dictionary-v1-3
+      - feature/ai-dictionary-v1-4
   workflow_dispatch:
 permissions:
   contents: read
@@ -22,6 +23,9 @@ jobs:
           node --check tests/academy.spec.mjs
           node --check tests/dictionary.spec.mjs
           node --check dictionary.js
+          node --check ai-dictionary.js
+          node --check worker/ai-dictionary.js
+          node --check tests/ai-dictionary.spec.mjs
           npm run test:syntax
       - name: Verify local references
         run: |
@@ -69,4 +73,22 @@ jobs:
             playwright-report/
             test-results/
           if-no-files-found: warn
+          retention-days: 14
+
+  preview-package:
+    runs-on: ubuntu-latest
+    needs: browser-e2e
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble offline-safe v1.4 preview
+        run: |
+          mkdir -p preview
+          cp index.html dictionary.js ai-dictionary.js preview/
+          cp PREVIEW-TESTING.md preview/README.md
+      - name: Upload isolated preview files
+        uses: actions/upload-artifact@v4
+        with:
+          name: fse-v1-4-preview
+          path: preview/
+          if-no-files-found: error
           retention-days: 14

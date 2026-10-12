@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 test.beforeEach(async({page})=>{await page.goto('/');await expect(page.locator('#dictFab')).toBeVisible()});
 test('floating dictionary opens, searches built-in glossary, saves and persists',async({page})=>{
- await page.locator('#dictFab').click();
+ await page.locator('#dictFab').click();await page.getByRole('button',{name:'기본 사전 검색'}).click();
  await expect(page.locator('#dictOverlay')).toBeVisible();
  await page.locator('#dictQuery').fill('Backlash');
  await expect(page.locator('#dictResults')).toContainText('Backlash');
@@ -14,7 +14,7 @@ test('floating dictionary opens, searches built-in glossary, saves and persists'
  await expect(page.locator('#dictShelfList')).toContainText('Backlash');
 });
 test('unknown word offers secure external lookup and saves search term',async({page})=>{
- await page.locator('#dictFab').click();
+ await page.locator('#dictFab').click();await page.getByRole('button',{name:'기본 사전 검색'}).click();
  await page.locator('#dictQuery').fill('unknown_gear_terminology_xyz');
  const a=page.locator('#dictResults a');
  await expect(a).toHaveAttribute('href',/https:\/\/en\.wiktionary\.org\/wiki\//);
@@ -25,7 +25,7 @@ test('unknown word offers secure external lookup and saves search term',async({p
  await expect(page.locator('#dictShelfList')).toContainText('unknown_gear_terminology_xyz');
 });
 test('dictionary memo, review, delete and export controls',async({page})=>{
- await page.locator('#dictFab').click();await page.locator('#dictQuery').fill('Backlash');
+ await page.locator('#dictFab').click();await page.getByRole('button',{name:'기본 사전 검색'}).click();await page.locator('#dictQuery').fill('Backlash');
  await page.locator('#dictResults button').first().click();await page.locator('#dictClose').click();
  await page.locator('nav [data-tab="dictionary"]').click();
  await page.locator('#dictShelfList textarea').first().fill('Measured at room temperature');
@@ -38,7 +38,7 @@ test('dictionary memo, review, delete and export controls',async({page})=>{
  await expect(page.locator('#dictShelfList')).toContainText('저장된 용어가 없습니다');
 });
 test('floating button only on learning tab and popup closes with escape',async({page})=>{
- await page.locator('#dictFab').click();await page.keyboard.press('Escape');
+ await page.locator('#dictFab').click();await page.getByRole('button',{name:'기본 사전 검색'}).click();await page.keyboard.press('Escape');
  await expect(page.locator('#dictOverlay')).toBeHidden();
  await page.locator('nav [data-tab="quiz"]').click();
  await expect(page.locator('#dictFab')).toBeHidden();
