@@ -9,6 +9,7 @@ test("curriculum has all 7 parts, 14 chapters and complete lesson contracts", ()
   assert.equal(data.parts.length, 7);
   assert.equal(data.parts.flatMap((p) => p.chapters).length, 14);
   assert.equal(data.lessons.length, 35);
+  assert.equal(new Set(data.lessons.map(l=>l.assessment.answer)).size,3,'Answer positions must be distributed');
   const ids = new Set(data.lessons.map((l) => l.id));
   assert.equal(ids.size, 35);
   for (const l of data.lessons) {
