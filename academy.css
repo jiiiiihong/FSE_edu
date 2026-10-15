@@ -1,0 +1,843 @@
+:root {
+  color-scheme: light;
+  --ink: #152c34;
+  --muted: #52666b;
+  --paper: #f5f4ef;
+  --line: #cbd3cd;
+  --accent: #125e53;
+  --pale: #e5eee8;
+  --orange: #984823;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+a {
+  color: var(--accent);
+  text-underline-offset: 4px;
+}
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+button,
+a,
+input,
+summary {
+  touch-action: manipulation;
+}
+button {
+  min-height: 44px;
+  padding: 10px 15px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: white;
+  color: var(--ink);
+  cursor: pointer;
+}
+button:hover {
+  border-color: var(--accent);
+  background: var(--pale);
+}
+button.primary,
+.primary {
+  background: var(--ink);
+  color: white;
+  border-color: var(--ink);
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+:focus-visible {
+  outline: 3px solid #ac501f;
+  outline-offset: 3px;
+}
+input,
+textarea,
+select {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid #98a9a1;
+  padding: 12px;
+  background: white;
+  color: var(--ink);
+  border-radius: 3px;
+  margin: 7px 0 16px;
+}
+input[type="checkbox"] {
+  width: 22px;
+  min-height: 22px;
+  vertical-align: middle;
+  margin: 8px;
+}
+textarea {
+  min-height: 150px;
+  line-height: 1.8;
+}
+label {
+  display: block;
+}
+h1,
+h2,
+h3 {
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+}
+h1 {
+  font-size: clamp(30px, 4.2vw, 58px);
+  font-weight: 650;
+  margin: 14px 0 22px;
+}
+h2 {
+  font-size: 28px;
+}
+h3 {
+  font-size: 21px;
+}
+p,
+li {
+  line-height: 1.85;
+}
+p {
+  overflow-wrap: anywhere;
+}
+.masthead {
+  padding: 22px max(24px, calc((100vw - 1320px) / 2));
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  background: var(--ink);
+  color: white;
+}
+.masthead a {
+  color: white;
+}
+.brand {
+  text-decoration: none;
+  font-size: 30px;
+  font-weight: 750;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.brand span {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  max-width: 100px;
+}
+.edition {
+  font:
+    11px ui-monospace,
+    monospace;
+  letter-spacing: 0.08em;
+  flex: 1;
+}
+body > nav {
+  display: flex;
+  gap: 5px;
+  max-width: 1320px;
+  margin: auto;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+}
+nav button {
+  background: transparent;
+  border-color: transparent;
+  white-space: nowrap;
+}
+nav button.active {
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  border-radius: 0;
+  font-weight: 700;
+}
+main {
+  max-width: 1320px;
+  margin: auto;
+  padding: 38px 24px 80px;
+  min-height: 65vh;
+}
+.eyebrow {
+  font:
+    12px ui-monospace,
+    monospace;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.muted,
+small {
+  color: var(--muted);
+}
+.hero {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 50px;
+  margin-bottom: 40px;
+}
+.hero p {
+  max-width: 640px;
+}
+.hero-art {
+  display: flex;
+  align-items: center;
+}
+.hero-art figure {
+  width: 100%;
+  margin: 0;
+}
+.hero-art svg {
+  height: auto;
+}
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin: 30px 0;
+}
+.stats > div {
+  padding: 20px;
+  border-right: 1px solid var(--line);
+}
+.stats > div:last-child {
+  border: 0;
+}
+.stats strong {
+  display: block;
+  font:
+    32px ui-monospace,
+    monospace;
+  margin: 8px 0;
+}
+.dashboard {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+  gap: 45px;
+}
+.part-row {
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 50px minmax(0, 1fr) 130px;
+  gap: 16px;
+  padding: 25px 0;
+  align-items: center;
+}
+.part-row h3 {
+  margin: 0 0 5px;
+}
+.part-row p {
+  margin: 0;
+  font-size: 14px;
+}
+.part-number {
+  font:
+    26px ui-monospace,
+    monospace;
+  color: var(--accent);
+}
+.part-row button {
+  font-size: 13px;
+}
+.panel {
+  border: 1px solid var(--line);
+  background: white;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.panel h3 {
+  margin-top: 0;
+}
+.tool-link {
+  display: block;
+  text-align: left;
+  width: 100%;
+  margin: 10px 0;
+}
+.mastery-row {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 50px;
+}
+.toc {
+  position: sticky;
+  top: 20px;
+  align-self: start;
+  border-right: 1px solid var(--line);
+  padding-right: 22px;
+  max-height: 90vh;
+  overflow: auto;
+}
+.toc a {
+  display: block;
+  padding: 10px 0;
+  min-height: 44px;
+  text-decoration: none;
+  font-size: 14px;
+}
+.toc a.current {
+  font-weight: 700;
+  color: var(--ink);
+}
+.toc h3 {
+  font-size: 16px;
+}
+.reader {
+  max-width: 850px;
+  min-width: 0;
+}
+.reader section {
+  margin: 35px 0;
+  padding-top: 12px;
+  scroll-margin-top: 20px;
+}
+.reader section > h2 {
+  font-size: 23px;
+  border-top: 1px solid var(--line);
+  padding-top: 23px;
+}
+.reader section > h2 span {
+  font:
+    12px ui-monospace,
+    monospace;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 10px;
+}
+.lede {
+  font-size: 19px;
+  line-height: 1.85;
+}
+.formula {
+  padding: 24px;
+  background: var(--ink);
+  color: white;
+  border-left: 4px solid #bc7843;
+}
+.formula .expression {
+  font:
+    clamp(17px, 2vw, 23px) ui-monospace,
+    monospace;
+  line-height: 1.85;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.formula p {
+  color: #e0ebe6;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+.example {
+  padding: 22px 28px;
+  background: var(--pale);
+  border-left: 3px solid var(--accent);
+}
+.example ol {
+  padding-left: 24px;
+}
+.example li {
+  padding: 7px 0;
+}
+.caution {
+  padding: 18px 22px;
+  background: #f3e8d9;
+  border-left: 3px solid var(--orange);
+}
+.engineering-diagram {
+  margin: 22px 0;
+  background: #eaf0ea;
+  border: 1px solid var(--line);
+  padding: 15px;
+}
+.engineering-diagram svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: hidden;
+}
+.engineering-diagram text {
+  font-size: 15px;
+  fill: var(--ink);
+}
+.engineering-diagram line,
+.engineering-diagram circle,
+.engineering-diagram path,
+.engineering-diagram rect {
+  stroke: var(--ink);
+  stroke-width: 2;
+  fill: none;
+}
+.engineering-diagram .base {
+  stroke: #0b7567;
+  stroke-dasharray: 6 4;
+  fill: #0b75670b;
+}
+.engineering-diagram .reference {
+  stroke: #214f7c;
+  stroke-dasharray: 9 5;
+}
+.engineering-diagram .tip {
+  stroke: #8e4323;
+}
+.engineering-diagram .root {
+  stroke: #62665b;
+}
+.engineering-diagram .thin {
+  stroke: #788e84;
+  stroke-width: 1;
+}
+.engineering-diagram .curve,
+.engineering-diagram .accent {
+  stroke: #a64b21;
+  stroke-width: 3;
+}
+.engineering-diagram .point {
+  fill: #a64b21;
+  stroke: none;
+}
+.engineering-diagram figcaption {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+  padding-top: 15px;
+}
+.chapter {
+  border-top: 1px solid var(--line);
+  margin: 30px 0;
+  padding-top: 15px;
+}
+.lesson-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.lesson-row button {
+  text-align: left;
+}
+.lesson-row small {
+  display: block;
+  margin-top: 7px;
+}
+.badge {
+  display: inline-block;
+  background: var(--pale);
+  padding: 5px 9px;
+  font:
+    12px ui-monospace,
+    monospace;
+}
+.assessment {
+  border-top: 1px solid var(--line);
+  padding: 22px 0;
+  margin-top: 20px;
+}
+.assessment .choices {
+  display: grid;
+  gap: 8px;
+}
+.assessment .choices button {
+  text-align: left;
+}
+.feedback {
+  padding: 12px 18px;
+  margin: 15px 0;
+  background: var(--pale);
+}
+.feedback.bad {
+  background: #fae8df;
+}
+.feedback li {
+  font-size: 14px;
+}
+.tool-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 18px;
+}
+.outputs {
+  font-family: ui-monospace, monospace;
+  line-height: 2.1;
+  background: var(--pale);
+  padding: 18px;
+  margin-top: 15px;
+}
+.full {
+  grid-column: 1/-1;
+}
+.tool-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+progress {
+  width: 100%;
+  accent-color: var(--accent);
+  height: 8px;
+}
+.completion {
+  padding: 25px;
+  background: white;
+  border: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+}
+.completion label {
+  flex: 1;
+}
+.references li {
+  font-size: 14px;
+}
+.references small {
+  display: block;
+}
+.skip {
+  position: absolute;
+  left: 10px;
+  top: -100px;
+  background: white;
+  padding: 15px;
+  z-index: 999;
+}
+.skip:focus {
+  top: 10px;
+}
+#storageStatus:not(:empty) {
+  position: fixed;
+  left: 15px;
+  bottom: 100px;
+  max-width: calc(100% - 30px);
+  padding: 15px;
+  background: #fae8df;
+  border: 1px solid var(--orange);
+  z-index: 90;
+}
+footer {
+  border-top: 1px solid var(--line);
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+.dict-fab {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  z-index: 50;
+}
+.dict-overlay[hidden],
+.dict-fab[hidden],
+[hidden] {
+  display: none !important;
+}
+.dict-overlay {
+  position: fixed;
+  inset: 0;
+  background: #0009;
+  z-index: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dict-panel {
+  background: var(--paper);
+  padding: 25px;
+  width: min(700px, 100%);
+  max-height: 90dvh;
+  overflow: auto;
+}
+.dict-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dict-result,
+.dict-ai-entry,
+.dict-advanced {
+  background: white;
+  border: 1px solid var(--line);
+  padding: 15px;
+  margin: 15px 0;
+}
+details summary {
+  min-height: 44px;
+  padding: 12px;
+  cursor: pointer;
+}
+.dict-open {
+  overflow: hidden;
+}
+.ai14-sheet {
+  background: var(--paper) !important;
+  color: var(--ink) !important;
+}
+.ai14-sheet p,
+.ai14-status,
+.ai14-notice {
+  color: var(--muted) !important;
+}
+.ai14-sheet button {
+  background: white;
+  color: var(--ink);
+}
+.ai14-search input,
+.ai14-sheet textarea,
+.ai14-sheet select {
+  background: white;
+  color: var(--ink);
+}
+.ai16-hero {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.ai16-summary {
+  background: var(--pale);
+  padding: 15px;
+}
+.ai16-section {
+  border-bottom: 1px solid var(--line);
+}
+.ai16-eyebrow {
+  font-size: 12px;
+  color: var(--accent);
+}
+.ai16-save {
+  margin: 15px 0;
+}
+.dict-filter-row {
+  display: flex;
+  gap: 12px;
+}
+.dict-ai-entry p {
+  white-space: pre-wrap;
+}
+.dict-ai-entry strong {
+  display: block;
+}
+.tool-error {
+  color: #96331e;
+}
+.lesson-next {
+  margin: 20px 0;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+@media (max-width: 850px) {
+  .edition {
+    display: none;
+  }
+  .masthead {
+    justify-content: space-between;
+    padding: 18px 20px;
+  }
+  .masthead > a:last-child {
+    font-size: 12px;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .hero-art {
+    display: none;
+  }
+  .dashboard,
+  .tool-grid {
+    grid-template-columns: 1fr;
+  }
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .toc {
+    position: static;
+    max-height: none;
+    border: 0;
+    padding: 0;
+  }
+  .toc details {
+    border: 1px solid var(--line);
+    padding: 8px;
+  }
+  .toc .toc-chapters {
+    display: none;
+  }
+  .stats > div {
+    padding: 15px;
+  }
+  .stats strong {
+    font-size: 26px;
+  }
+  .reader {
+    max-width: none;
+  }
+  body > nav {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--paper);
+    padding: 8px 12px;
+  }
+  .part-row {
+    grid-template-columns: 35px minmax(0, 1fr);
+    gap: 10px;
+  }
+  .part-row > div:last-child {
+    grid-column: 2;
+  }
+  .part-row > div:last-child button {
+    width: 100%;
+  }
+  main {
+    padding: 28px 18px 90px;
+  }
+  .part-row h3 {
+    font-size: 19px;
+  }
+  .fields {
+    gap: 0 12px;
+  }
+  .tool-grid .panel {
+    padding: 18px;
+  }
+  .lesson-row {
+    grid-template-columns: 1fr;
+  }
+  .engineering-diagram {
+    padding: 8px;
+  }
+  .engineering-diagram text {
+    font-size: 16px;
+  }
+  .dict-panel {
+    max-height: 95dvh;
+  }
+  .brand {
+    font-size: 24px;
+  }
+  .masthead {
+    gap: 10px;
+  }
+  h2 {
+    font-size: 25px;
+  }
+}
+@media (max-width: 380px) {
+  .fields {
+    grid-template-columns: 1fr;
+  }
+  .stats {
+    grid-template-columns: 1fr;
+  }
+  .stats > div {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  body > nav button {
+    font-size: 13px;
+    padding: 9px;
+  }
+  .brand span {
+    font-size: 10px;
+  }
+  .masthead > a:last-child {
+    max-width: 70px;
+  }
+  .engineering-diagram {
+    overflow-x: auto;
+  }
+  .engineering-diagram svg {
+    min-width: 510px;
+  }
+  .dict-filter-row {
+    display: block;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media print {
+  body > nav,
+  .toc,
+  .dict-fab,
+  footer,
+  button {
+    display: none;
+  }
+  .layout {
+    display: block;
+  }
+  .reader {
+    max-width: none;
+  }
+  .formula {
+    background: white;
+    color: black;
+  }
+  .formula p {
+    color: black;
+  }
+  main {
+    padding: 0;
+  }
+  .masthead {
+    background: white;
+    color: black;
+  }
+  .masthead a {
+    color: black;
+  }
+}
+
+/* Grid children must shrink so a scrollable technical diagram stays within its panel. */
+.tool-grid > * {
+  min-width: 0;
+}
+.outputs {
+  overflow-wrap: anywhere;
+}
+.fields > * {
+  min-width: 0;
+}

@@ -15,6 +15,14 @@ const open=()=>{previous=document.activeElement;root.hidden=false;document.body.
 const hide=()=>{root.hidden=true;document.body.classList.remove("ai14-open");previous?.focus?.()};
 close.onclick=hide;root.addEventListener("click",e=>{if(e.target===root)hide()});document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!root.hidden)hide()});
 searchTab.onclick=()=>showTab("search");savedTab.onclick=()=>showTab("saved");
+// Keep keyboard navigation inside the active AI dialog, including the saved shelf.
+root.addEventListener("keydown",e=>{
+ if(e.key!=="Tab"||root.hidden)return;
+ const focusable=[...root.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),a[href]')].filter(x=>x.getClientRects().length);
+ if(!focusable.length)return;const first=focusable[0],last=focusable.at(-1);
+ if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+ else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+});
 function store(){try{localStorage.setItem(KEY,JSON.stringify(saved));return true}catch{status.textContent="저장 공간이 부족하거나 브라우저 저장이 차단되었습니다.";return false}}
 function display(item){
 result.replaceChildren();

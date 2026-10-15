@@ -64,9 +64,9 @@ jobs:
         with:
           node-version: '22'
       - name: Install test dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
       - name: Install Chromium and OS dependencies
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install --with-deps chromium webkit
       - name: Run real-browser desktop and mobile tests
         run: npm run test:e2e
       - name: Upload browser test evidence
@@ -88,7 +88,10 @@ jobs:
       - name: Assemble offline-safe v1.4 preview
         run: |
           mkdir -p preview
-          cp index.html dictionary.js ai-dictionary.js preview/
+          mkdir -p preview/content preview/docs
+          cp index.html legacy.html *.js *.mjs *.css preview/
+          cp content/curriculum.json preview/content/
+          cp docs/*.md preview/docs/
           cp PREVIEW-TESTING.md preview/README.md
       - name: Upload isolated preview files
         uses: actions/upload-artifact@v4

@@ -41,8 +41,7 @@ test('dictionary memo, review, delete and export controls',async({page})=>{
 test('floating button only on learning tab and popup closes with escape',async({page})=>{
  await page.locator('#dictFab').click();await page.getByRole('button',{name:'기본 사전 검색'}).click();await page.keyboard.press('Escape');
  await expect(page.locator('#dictOverlay')).toBeHidden();
- await page.locator('nav .fse-more').click();
- await page.locator('#fse-more-menu button').first().click();
+ await page.locator('nav [data-tab="quiz"]').click();
  await expect(page.locator('#dictFab')).toBeHidden();
  await page.locator('nav [data-tab="home"]').click();
  await expect(page.locator('#dictFab')).toBeVisible();

@@ -1,0 +1,16 @@
+{
+  "fullRun": {
+    "startTime": "2026-10-13T09:50:03.140Z",
+    "duration": 601979.37,
+    "expected": 214,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  },
+  "retainedTests": {
+    "count": 212,
+    "passed": 212,
+    "explanation": "The four monolithic glossary tests are superseded by seven per-unit tests per project; remaining full-run tests all passed."
+  },
+  "targetedRun": null
+}
