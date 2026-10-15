@@ -1,0 +1,2968 @@
+{
+  "version": 2,
+  "sources": {
+    "khk": {
+      "title": "KHK Gear Technical Reference — 교육용 기하 참고",
+      "url": "https://khkgears.net/new/gear_knowledge/gear_technical_reference/",
+      "scope": "인벌류트·모듈·물림·치수 계산",
+      "status": "KHK reference index and involute profile URL verified HTTP 200 on 2026-10-13; chapter review pending"
+    },
+    "iso1": {
+      "title": "ISO 1328-1:2013 — Cylindrical gears — ISO system of flank tolerance classification — Part 1",
+      "url": "https://www.iso.org/standard/45309.html",
+      "scope": "치면 편차 정의와 허용값; 세부 표/조항 원문 확인 필요",
+      "status": "catalogue verification pending"
+    },
+    "iso2": {
+      "title": "ISO 1328-2:2020 — Double flank radial composite deviations",
+      "url": "https://www.iso.org/search.html?q=ISO%201328-2%3A2020",
+      "scope": "양면 반경 종합 편차; 표준 원문 검토 필요",
+      "status": "catalogue verification pending"
+    },
+    "dudley": {
+      "title": "Dudley’s Handbook of Practical Gear Design and Manufacture, 3rd ed., Stephen P. Radzevich, CRC Press, 2016",
+      "url": "https://www.routledge.com/search?kw=Dudley%20Handbook%20Gear",
+      "scope": "기어 설계·제조·계측의 교재 참고; 페이지별 대조 필요",
+      "status": "bibliographic reference; claim review pending"
+    },
+    "oem": {
+      "title": "해당 장비·공구·계측기 제조사의 승인된 매뉴얼",
+      "url": null,
+      "scope": "장비별 알람·조건·교정·안전 절차. 사용자가 실제 판본 확인",
+      "status": "machine-specific reference required"
+    }
+  },
+  "parts": [
+    {
+      "id": 1,
+      "roman": "I",
+      "title": "Gear Engineering Fundamentals",
+      "korean": "기어공학 기초",
+      "chapters": [
+        {
+          "id": "p1-c1",
+          "title": "동력 전달과 형상"
+        },
+        {
+          "id": "p1-c2",
+          "title": "치의 기하와 맞물림"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "roman": "II",
+      "title": "Gear Geometry & Tooth Generation",
+      "korean": "기어 기하와 치형 생성",
+      "chapters": [
+        {
+          "id": "p2-c1",
+          "title": "인벌류트와 단면"
+        },
+        {
+          "id": "p2-c2",
+          "title": "물림과 창성 설계"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "roman": "III",
+      "title": "Gear Manufacturing Processes",
+      "korean": "기어 제조 공정",
+      "chapters": [
+        {
+          "id": "p3-c1",
+          "title": "절삭과 창성 운동"
+        },
+        {
+          "id": "p3-c2",
+          "title": "정삭과 공정 설계"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "roman": "IV",
+      "title": "Gear Materials & Heat Treatment",
+      "korean": "소재와 열처리",
+      "chapters": [
+        {
+          "id": "p4-c1",
+          "title": "소재와 조직 변화"
+        },
+        {
+          "id": "p4-c2",
+          "title": "변형과 후공정"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "roman": "V",
+      "title": "Gear Metrology & Quality",
+      "korean": "기어 계측과 품질",
+      "chapters": [
+        {
+          "id": "p5-c1",
+          "title": "측정 기준과 평가 항목"
+        },
+        {
+          "id": "p5-c2",
+          "title": "검사 해석과 규격"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "roman": "VI",
+      "title": "Machine Tool & FSE Practice",
+      "korean": "장비와 FSE 실무",
+      "chapters": [
+        {
+          "id": "p6-c1",
+          "title": "구동계와 운동 오차"
+        },
+        {
+          "id": "p6-c2",
+          "title": "교정과 진단 절차"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "roman": "VII",
+      "title": "Integrated Engineering Cases",
+      "korean": "통합 공학 사례",
+      "chapters": [
+        {
+          "id": "p7-c1",
+          "title": "소음과 기하 품질"
+        },
+        {
+          "id": "p7-c2",
+          "title": "공정 변화와 검증"
+        }
+      ]
+    }
+  ],
+  "lessons": [
+    {
+      "id": "p1-l1",
+      "part": 1,
+      "chapter": "p1-c1",
+      "title": "기어비·속도·토크 | Ratio & torque",
+      "objectives": [
+        "잇수로 속도비를 계산하고 효율을 포함한 토크를 설명한다."
+      ],
+      "context": "모터 속도와 부하 토크를 연결하는 첫 설계 판단이다.",
+      "theory": "치의 반복 맞물림은 평균 각속도비를 고정한다. 정상 상태에서 입력 동력의 일부는 마찰과 윤활 손실로 소모된다. 작은 기어를 보통 피니언(Pinion), 상대를 기어(Gear)라 부르며 구동 여부와는 독립적이다.",
+      "formula": {
+        "expression": "i = z₂/z₁ = n₁/n₂; T₂ = η i T₁; P = 2πnT/60",
+        "definitions": "z: 잇수(무차원), n: rpm, T: N·m, P: W, η: 효율 0–1. 단일 기어쌍, 정상 상태의 동력 평형; 관성 토크 제외."
+      },
+      "diagram": "ratio",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "z₁=20, z₂=60 → i=60/20=3",
+          "n₁=900 rpm → n₂=900/3=300 rpm",
+          "T₁=10 N·m, 가정 η=0.95 → T₂=28.5 N·m"
+        ]
+      },
+      "application": "감속기 사양의 입력/출력과 효율 조건을 함께 읽는다.",
+      "limitations": "웜의 효율은 기하·마찰에 민감하며 역구동/자기잠김을 잇수만으로 판단할 수 없다.",
+      "mistakes": [
+        "감속비가 3이면 손실을 고려하지 않고 실제 토크도 항상 3배라고 생각한다."
+      ],
+      "prerequisites": [],
+      "legacyRefs": [
+        0
+      ],
+      "sources": [
+        "khk"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "잇수로 속도비를 계산하고 효율을 포함한 토크를 설명한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Recall",
+        "prompt": "이 예제의 출력 속도는?",
+        "choices": [
+          "300 rpm",
+          "2700 rpm",
+          "900 rpm"
+        ],
+        "answer": 0,
+        "reasons": [
+          "잇수 비의 역수만큼 속도가 낮아진다.",
+          "잇수 비를 곱하면 증속으로 뒤바뀐다.",
+          "동일 잇수가 아니므로 속도는 같지 않다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "900 rpm, 20/60T의 출력 속도",
+        "answer": 300,
+        "unit": "rpm",
+        "tolerance": 0.1,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "n₂=900×20/60=300 rpm"
+      },
+      "theoryParagraphs": [
+        "각속도는 ω=2πn/60이다. 입력/출력 동력의 관계 P₂=ηP₁에 P=ωT를 넣으면 T₂/T₁=ηω₁/ω₂=ηi가 된다. 따라서 속도비는 잇수로 정해지지만 토크는 손실 모델을 필요로 한다.",
+        "정상 동력 평형은 기어 자체의 관성 가속을 제외한다. 급가감속 중에는 축 관성·제어기·마찰·탄성이 측정 토크에 함께 나타난다."
+      ]
+    },
+    {
+      "id": "p1-l2",
+      "part": 1,
+      "chapter": "p1-c1",
+      "title": "기어 형식과 축 배치 | Gear types",
+      "objectives": [
+        "평·헬리컬·베벨·웜·내치기어의 축 배치를 구분한다."
+      ],
+      "context": "기어 형식은 공간·하중·공구 접근성의 제약을 결정한다.",
+      "theory": "평기어(Spur)는 축과 평행한 치선, 헬리컬(Helical)은 기울어진 치선을 가진다. 평행축 외접 헬리컬 쌍은 같은 모듈/압력각과 반대 손잡이 방향이 필요하다. 베벨(Bevel)은 교차축, 웜(Worm)은 통상 비평행·비교차축에 사용된다. 내치(Internal)는 링 안쪽 치와 외치 피니언의 맞물림이다.",
+      "formula": {
+        "expression": "외접: ω₂/ω₁ = −z₁/z₂; 내접: ω₂/ω₁ = +z₁/z₂",
+        "definitions": "ω: 동일 관찰 방향에서의 부호 있는 rad/s. 평행축의 단일 원통 기어쌍만 해당."
+      },
+      "diagram": "types",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "외접 20/40T, ω₁=10 rad/s → ω₂=−5 rad/s",
+          "내접 20/60T, ω₁=10 rad/s → ω₂=+3.333 rad/s"
+        ]
+      },
+      "application": "축 배치 스케치와 손잡이 방향을 도면 제원표와 대조한다.",
+      "limitations": "베벨·웜의 방향은 축과 나선 방향을 함께 정의해야 한다.",
+      "mistakes": [
+        "Helical이라는 이름만 보고 두 축이 항상 평행하다고 단정한다."
+      ],
+      "prerequisites": [
+        "p1-l1"
+      ],
+      "legacyRefs": [
+        0
+      ],
+      "sources": [
+        "khk"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "평·헬리컬·베벨·웜·내치기어의 축 배치를 구분한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Understanding",
+        "prompt": "평행축 내접 기어쌍의 회전방향은?",
+        "choices": [
+          "항상 정지",
+          "같은 방향",
+          "반대 방향"
+        ],
+        "answer": 1,
+        "reasons": [
+          "잇수 차이는 정지를 의미하지 않는다.",
+          "같은 관찰 방향에서 같은 부호다.",
+          "반대 방향은 평행축 외접 관계다."
+        ]
+      }
+    },
+    {
+      "id": "p1-l3",
+      "part": 1,
+      "chapter": "p1-c1",
+      "title": "네 개의 원과 치높이 | Reference circles",
+      "objectives": [
+        "기준원·기초원·치끝원·치저원을 구분하고 치높이를 계산한다."
+      ],
+      "context": "측정 보고서의 기준 지름을 치끝 실측 지름과 혼동하지 않기 위해 필요하다.",
+      "theory": "기준원(Reference circle)은 모듈과 잇수로 정의되고 기초원(Base circle)은 인벌류트 생성 원이다. 치끝원(Tip circle)과 치저원(Root circle)은 재료 경계를 나타낸다. 치끝높이(Addendum)·치저높이(Dedendum)는 기준원에 대한 반경 차다.",
+      "formula": {
+        "expression": "d = mz; d_b = d cos α; d_a = d + 2h_a; d_f = d − 2h_f",
+        "definitions": "m,d,h: mm; α: 기준 압력각. 평기어. 예제는 x=0, h_a=m, h_f=1.25m인 교육용 기본 랙을 가정."
+      },
+      "diagram": "circles",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "m=2 mm, z=30 → d=60 mm",
+          "α=20° → d_b=60×cos20°=56.382 mm",
+          "h_a=2, h_f=2.5 mm → d_a=64, d_f=55 mm"
+        ]
+      },
+      "application": "기초원 아래에는 인벌류트가 없으므로 치저 필렛을 별도로 확인한다.",
+      "limitations": "치저원·치끝원은 전위, 치끝 단축, 공구 팁과 클리어런스에 따라 바뀐다.",
+      "mistakes": [
+        "d_b와 d_f가 항상 같다고 가정한다."
+      ],
+      "prerequisites": [
+        "p1-l2"
+      ],
+      "legacyRefs": [
+        0
+      ],
+      "sources": [
+        "khk"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "기준원·기초원·치끝원·치저원을 구분하고 치높이를 계산한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Application",
+        "prompt": "위 예제의 치끝원 지름은?",
+        "choices": [
+          "60 mm",
+          "62 mm",
+          "64 mm"
+        ],
+        "answer": 2,
+        "reasons": [
+          "60 mm는 기준원이다.",
+          "치끝높이는 반경이므로 한 번만 더하면 틀린다.",
+          "반경 높이 2 mm를 지름에 두 번 더한다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "m=2 mm, z=30, x=0, h_a=m의 치끝원 지름",
+        "answer": 64,
+        "unit": "mm",
+        "tolerance": 0.01,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "d_a=mz+2m=64 mm"
+      }
+    },
+    {
+      "id": "p1-l4",
+      "part": 1,
+      "chapter": "p1-c2",
+      "title": "치두께와 백래시 | Tooth thickness & backlash",
+      "objectives": [
+        "원주 치두께와 백래시를 정의하고 측정 방향을 명시한다."
+      ],
+      "context": "반전 위치 오차와 과열 위험을 분리해 조사할 때 사용한다.",
+      "theory": "치두께(Tooth thickness)는 지정 원에서 치의 양 치면 사이 호 길이다. 원주 백래시(Circumferential backlash)는 같은 작동원에서 상대 치홈 폭과 치두께의 차다. 법선 백래시는 작용선 방향으로 투영된다. 축·베어링 유격도 반전량에 포함될 수 있다.",
+      "formula": {
+        "expression": "p = πm; s₀ = p/2; j_n = j_t cos α_w",
+        "definitions": "s₀: 기준원 치두께(mm), 무전위·백래시 감량 없는 평기어. j_t,j_n: 작동원 원주/법선 백래시(mm), α_w: 작동 압력각."
+      },
+      "diagram": "backlash",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "m=2 → p=6.2832 mm → s₀=3.1416 mm",
+          "가정 j_t=0.10 mm, α_w=20° → j_n=0.09397 mm"
+        ]
+      },
+      "application": "고정 측과 회전 측, 측정 반경·하중·온도를 기록한다.",
+      "limitations": "위 식은 평기어의 방향 변환이다. 헬리컬은 단면과 3차원 투영을 정의해야 한다.",
+      "mistakes": [
+        "0.10 mm를 위치와 방향 없이 장비 간 비교한다."
+      ],
+      "prerequisites": [
+        "p1-l3"
+      ],
+      "legacyRefs": [
+        0
+      ],
+      "sources": [
+        "khk"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "원주 치두께와 백래시를 정의하고 측정 방향을 명시한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Diagnosis",
+        "prompt": "백래시 보고서에 먼저 필요한 정보는?",
+        "choices": [
+          "측정 원·방향·온도",
+          "AI가 추천한 고정 공차",
+          "기어 색상"
+        ],
+        "answer": 0,
+        "reasons": [
+          "동일 물리량을 비교하기 위한 조건이다.",
+          "도면 없는 공차는 합격 기준이 될 수 없다.",
+          "색상은 백래시 정의에 포함되지 않는다."
+        ]
+      }
+    },
+    {
+      "id": "p1-l5",
+      "part": 1,
+      "chapter": "p1-c2",
+      "title": "물림과 힘 | Meshing forces",
+      "objectives": [
+        "접선·반경·축방향 하중을 구분한다."
+      ],
+      "context": "베어링 선정과 치면 접촉 이상을 연결하는 기본 모델이다.",
+      "theory": "기준원 접선 힘은 전달 토크와 관련된다. 헬리컬의 치면 법선력은 접선 외에 반경·축방향 성분을 가진다. 축방향 힘의 부호는 손잡이·회전·구동 조건에 따라 달라진다.",
+      "formula": {
+        "expression": "F_t = 2T/d; F_r = F_t tan α_t; |F_a| = F_t tan |β|",
+        "definitions": "F: N, T: N·m, 이 식의 d: m. α_t: 정면 기준 압력각, β: 기준 헬릭스각. 기준 기하에서 마찰 없는 정적 하중 근사."
+      },
+      "diagram": "forces",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "T=50 N·m, d=0.1 m → F_t=1000 N",
+          "α_t=20°, β=0° → F_r=364.0 N, F_a=0 N"
+        ]
+      },
+      "application": "동일 토크에서도 작은 기어는 더 큰 접선력을 전달한다.",
+      "limitations": "충격·동하중·치면 마찰·작동 압력각 변화는 별도 고려한다.",
+      "mistakes": [
+        "지름 mm를 N·m 토크 식에 바로 대입해 힘을 1000배 작게 구한다."
+      ],
+      "prerequisites": [
+        "p1-l4"
+      ],
+      "legacyRefs": [
+        0
+      ],
+      "sources": [
+        "khk"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "접선·반경·축방향 하중을 구분한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Diagnosis",
+        "prompt": "100 mm 지름에 50 N·m 토크일 때 접선 힘은?",
+        "choices": [
+          "500 N",
+          "1000 N",
+          "1 N"
+        ],
+        "answer": 1,
+        "reasons": [
+          "지름을 반경으로 쓰면 계수 2를 놓친다.",
+          "100 mm=0.1 m를 사용한다.",
+          "mm와 m를 혼용한 결과다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "T=50 N·m, d=100 mm의 접선 힘",
+        "answer": 1000,
+        "unit": "N",
+        "tolerance": 0.1,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "F_t=2×50/0.1=1000 N"
+      }
+    },
+    {
+      "id": "p2-l1",
+      "part": 2,
+      "chapter": "p2-c1",
+      "title": "인벌류트 생성 | Involute generation",
+      "objectives": [
+        "기초원에서 풀리는 줄로 인벌류트 곡선을 설명하고 좌표를 계산한다."
+      ],
+      "context": "창성 공구의 운동과 일정 속도비 치형을 연결한다.",
+      "theory": "팽팽한 줄의 접점은 기초원 접선을 따른다. 줄 끝 궤적이 인벌류트이며 접선 방향의 법선은 항상 기초원에 접한다. 두 기초원의 공통 접선을 따라 접촉이 진행되어 일정 속도비를 얻는다.",
+      "formula": {
+        "expression": "X = r_b(cos t + t sin t); Y = r_b(sin t − t cos t); r = r_b√(1+t²)",
+        "definitions": "X,Y,r_b: mm, t: 풀린 줄 길이/r_b인 무차원 매개변수(삼각함수 rad). t≥0인 한쪽 가지."
+      },
+      "diagram": "involute",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "r_b=10 mm, t=0.5 → X=11.1730, Y=0.4063 mm",
+          "r=10√1.25=11.1803 mm; 줄 길이 r_b t=5 mm"
+        ]
+      },
+      "application": "시뮬레이터에서 줄의 접점·접선과 곡선을 함께 관찰한다.",
+      "limitations": "곡선 한 가지는 전체 기어 치가 아니다. 치두께 회전 배치·상대 치면·필렛·언더컷은 별도다.",
+      "mistakes": [
+        "t를 압력각의 도(degree) 값으로 직접 넣는다."
+      ],
+      "prerequisites": [
+        "p1-l5"
+      ],
+      "legacyRefs": [
+        1
+      ],
+      "sources": [
+        "khk"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "기초원에서 풀리는 줄로 인벌류트 곡선을 설명하고 좌표를 계산한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Recall",
+        "prompt": "인벌류트의 법선은 어디에 접하는가?",
+        "choices": [
+          "치끝원",
+          "치저원",
+          "기초원"
+        ],
+        "answer": 2,
+        "reasons": [
+          "치끝원은 곡선의 종료 반경이다.",
+          "치저원은 재료 경계이며 생성 원이 아니다.",
+          "풀리는 줄이 기초원 접선이다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "r_b=10 mm, t=0.5일 때 인벌류트 점의 반경",
+        "answer": 11.18034,
+        "unit": "mm",
+        "tolerance": 0.001,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "r=10√(1+0.5²)=11.18034 mm"
+      },
+      "theoryParagraphs": [
+        "기초원 접점의 위치는 r_b(cos t, sin t)이다. 접선 방향 벡터 (sin t, −cos t)에 풀린 길이 r_b t를 더하면 제시한 X,Y 식이 된다. 줄은 반경에 수직이고 곡선의 법선 방향이다.",
+        "곡선점의 반경은 r_b√(1+t²)이며 해당 점의 압력각 φ는 tanφ=t를 만족한다. 극각은 invφ=tanφ−φ이다. inv 함수의 φ는 rad이며 압력각의 도 값과 직접 더할 수 없다."
+      ]
+    },
+    {
+      "id": "p2-l2",
+      "part": 2,
+      "chapter": "p2-c1",
+      "title": "모듈·원주피치·기초피치 | Pitches",
+      "objectives": [
+        "정면 원주피치와 기초피치를 계산한다."
+      ],
+      "context": "기초피치 호환은 인벌류트 접촉의 연속성을 판단하는 단서다.",
+      "theory": "모듈은 기준 지름을 잇수로 나눈 치 크기이다. 원주피치는 기준원 호 간격, 기초피치(Base pitch)는 기초원에서의 대응 간격이다. 동일 계열의 맞물림에는 기초피치와 치형 체계의 호환이 필요하다.",
+      "formula": {
+        "expression": "m = d/z; p_t = πm_t; p_bt = πm_t cos α_t",
+        "definitions": "m,d,p: mm, z: 정수. 평기어는 m_t=m. 모두 기준 기하."
+      },
+      "diagram": "circles",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "m_t=2 mm, α_t=20° → p_t=6.2832 mm",
+          "p_bt=6.2832×0.9396926=5.9043 mm"
+        ]
+      },
+      "application": "원주피치를 기초피치로 잘못 사용하면 물림률 계산이 달라진다.",
+      "limitations": "일치하는 기초피치만으로 간섭·축 배치·치두께 적합성이 보장되지 않는다.",
+      "mistakes": [
+        "p=πd라고 쓰고 잇수로 나누지 않는다."
+      ],
+      "prerequisites": [
+        "p2-l1"
+      ],
+      "legacyRefs": [
+        1
+      ],
+      "sources": [
+        "khk"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "정면 원주피치와 기초피치를 계산한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Understanding",
+        "prompt": "m=2 mm일 때 원주피치는?",
+        "choices": [
+          "6.2832 mm",
+          "2 mm",
+          "12.5664 mm"
+        ],
+        "answer": 0,
+        "reasons": [
+          "πm이다.",
+          "모듈과 피치는 다르다.",
+          "지름 4 mm의 원주와 혼동한 값이다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "m=2 mm, α=20°의 기초피치",
+        "answer": 5.90426,
+        "unit": "mm",
+        "tolerance": 0.001,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "p_b=2πcos20°=5.90426 mm"
+      }
+    },
+    {
+      "id": "p2-l3",
+      "part": 2,
+      "chapter": "p2-c1",
+      "title": "법선과 정면 | Normal & transverse",
+      "objectives": [
+        "법선 모듈·압력각을 정면 값으로 변환한다."
+      ],
+      "context": "헬리컬 도면과 공구 제원의 단면 기준을 맞추는 필수 단계다.",
+      "theory": "법선면(Normal plane)은 치선에 수직, 정면(Transverse plane)은 축에 수직이다. β가 커지면 같은 법선 모듈의 정면 간격과 기준 지름이 증가한다. 헬릭스각은 기준원에서 정의한다.",
+      "formula": {
+        "expression": "m_t = m_n/cos β; tan α_t = tan α_n/cos β; d = zm_t",
+        "definitions": "m_n,m_t,d: mm, α_n,α_t,β: 각도. 평행축 원통 인벌류트 헬리컬 기어."
+      },
+      "diagram": "helix",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "m_n=2, z=30, β=30° → m_t=2.3094 mm",
+          "α_n=20° → α_t=22.7959°",
+          "d=30×2.309401=69.2820 mm"
+        ]
+      },
+      "application": "기어 제원표의 n/t 첨자를 생략하지 않는다.",
+      "limitations": "베벨·웜에 이 원통기어 관계를 그대로 적용하지 않는다.",
+      "mistakes": [
+        "헬리컬 지름을 m_n z=60 mm로 계산한다."
+      ],
+      "prerequisites": [
+        "p2-l2"
+      ],
+      "legacyRefs": [
+        1
+      ],
+      "sources": [
+        "khk"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "법선 모듈·압력각을 정면 값으로 변환한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Application",
+        "prompt": "이 예제의 기준원 지름은?",
+        "choices": [
+          "34.6410 mm",
+          "69.2820 mm",
+          "60 mm"
+        ],
+        "answer": 1,
+        "reasons": [
+          "지름과 반경을 혼동한 값이다.",
+          "정면 모듈을 잇수에 곱한다.",
+          "법선 값을 바로 곱한 결과다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "m_n=2 mm, z=30, β=30°의 기준 지름",
+        "answer": 69.28203,
+        "unit": "mm",
+        "tolerance": 0.001,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "d=30×2/cos30°=69.28203 mm"
+      },
+      "theoryParagraphs": [
+        "같은 치간격을 법선 방향으로 투영하면 p_n=p_t cosβ이다. p=πm를 사용하면 m_n=m_t cosβ가 된다. d=z m_t는 축에 수직인 정면 기준원에 적용하므로 m_n을 그대로 사용하면 지름을 과소평가한다.",
+        "기준 헬릭스각 β는 기준원에서의 치선 방향이다. 작동원에서의 나선각이나 베이스 헬릭스각과 구분한다. 평행축 외접 기어의 손잡이 방향은 서로 반대여야 하며 압력각·기초피치 호환도 필요하다."
+      ]
+    },
+    {
+      "id": "p2-l4",
+      "part": 2,
+      "chapter": "p2-c2",
+      "title": "물림률·간섭·언더컷 | Contact & undercut",
+      "objectives": [
+        "평기어 정면 물림률을 계산하고 간섭과 언더컷을 구분한다."
+      ],
+      "context": "접촉 연속성과 작은 피니언의 치저 강도를 판단한다.",
+      "theory": "정면 물림률은 접촉 경로 길이를 기초피치로 나눈 값이다. 간섭(Interference)은 상대 치가 유효 인벌류트 밖에서 접촉하는 상황, 언더컷(Undercut)은 창성 중 공구가 치저 부근을 제거하는 현상이다. 헬리컬에는 치폭 방향 중첩 물림률도 있다.",
+      "formula": {
+        "expression": "ε_α = [√(r_a1²−r_b1²)+√(r_a2²−r_b2²)−a_w sin α_w]/p_bt; ε_β = b sin|β|/(πm_n)",
+        "definitions": "r,a,b,p,m: mm. 외접 원통쌍, 인벌류트 유효 범위 내 접촉. 평기어에서 β=0, ε_β=0."
+      },
+      "diagram": "contact",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "m=2, z₁=20, z₂=40, α=20°, x=0 → a_w=60 mm",
+          "r_a1=22, r_a2=42, r_b1=18.79385, r_b2=37.58770 mm",
+          "접촉 길이≈9.65457 mm; p_bt≈5.90426 mm → ε_α≈1.6352"
+        ]
+      },
+      "application": "계산 물림률과 접촉 흔적·소음 데이터를 함께 검토한다.",
+      "limitations": "치끝 수정·언더컷·변형은 실제 접촉 경로를 바꾼다. 1 초과가 품질 보증은 아니다.",
+      "mistakes": [
+        "물림률이 높다는 이유로 간섭 검토를 생략한다."
+      ],
+      "prerequisites": [
+        "p2-l3"
+      ],
+      "legacyRefs": [
+        1
+      ],
+      "sources": [
+        "khk"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "평기어 정면 물림률을 계산하고 간섭과 언더컷을 구분한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Diagnosis",
+        "prompt": "언더컷의 직접 원인은?",
+        "choices": [
+          "치폭이 커지는 것",
+          "열처리 경도가 높아지는 것",
+          "창성 공구가 치저의 치형 일부를 제거"
+        ],
+        "answer": 2,
+        "reasons": [
+          "치폭은 중첩 물림률과 관련된다.",
+          "경도 변화 자체는 언더컷 정의가 아니다.",
+          "생성 과정의 기하 현상이다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "예제 외접 평기어쌍의 정면 물림률",
+        "answer": 1.6352,
+        "unit": "무차원",
+        "tolerance": 0.001,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "접촉 경로/기초피치≈1.6352"
+      },
+      "theoryParagraphs": [
+        "접촉 경로는 각 기어의 치끝원과 작용선의 교점으로 제한된다. 기초원 접점에서 치끝원까지의 접선 길이는 √(r_a²−r_b²)이다. 두 접선 길이의 합에서 기초원 접점 사이 거리 a_w sinα_w를 빼면 명목 접촉 길이가 된다.",
+        "무전위 평기어, 치끝높이계수 h_a*=1, 이상적 기본 랙 창성의 언더컷 한계는 z_min≈2h_a*/sin²α이다. α=20°에서는 약 17.10이며 작은 잇수는 전위/공구/치저 형상을 검토한다. 이 한계는 실제 공구 팁·치두께·치끝 간섭을 모두 판정하지 않는다.",
+        "헬리컬의 총 물림률은 명목상 ε_γ=ε_α+ε_β로 본다. 하중 분담은 정수/비정수 물림률, 치형 수정, 치폭 접촉과 변형에 의존하므로 총값만으로 소음이나 강도를 보증하지 않는다."
+      ]
+    },
+    {
+      "id": "p2-l5",
+      "part": 2,
+      "chapter": "p2-c2",
+      "title": "전위와 작동 중심거리 | Profile shift",
+      "objectives": [
+        "기준 중심거리와 작동 중심거리·작동 압력각을 구분한다."
+      ],
+      "context": "전위 설계와 조립 중심거리 변경을 같은 것으로 취급하지 않기 위해 필요하다.",
+      "theory": "전위(Profile shift) x는 랙형 공구의 반경 이동량을 모듈로 나눈 값이다. 기준 지름은 여전히 mz다. 작동 중심거리가 커지면 기초원은 유지되고 작동 압력각이 커진다. 전위 합과 치두께 요구가 작동 중심거리 설계에 영향을 준다.",
+      "formula": {
+        "expression": "a = m(z₁+z₂)/2; cos α_w = a cos α/a_w; s = m(π/2 + 2x tan α); inv α = tan α − α (rad)",
+        "definitions": "a,a_w,s,m: mm, x: 무차원. 외접 평기어, s는 기준원 치두께(백래시 감량 제외). α는 기준, α_w는 작동 압력각."
+      },
+      "diagram": "contact",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "m=2, z₁=20, z₂=40 → a=60 mm",
+          "a_w=61 mm, α=20° → cos α_w=60 cos20°/61 → α_w≈22.4388°",
+          "x=0.2 → s=2(π/2+0.4tan20°)=3.4328 mm"
+        ]
+      },
+      "application": "기준 값과 작동 값을 도면·검사 보고서에 따로 기록한다.",
+      "limitations": "이 관계만으로 전위쌍의 백래시·치끝높이·치끝두께를 결정할 수 없다.",
+      "mistakes": [
+        "전위가 있으면 기준 지름도 d=m(z+2x)로 바뀐다고 생각한다."
+      ],
+      "prerequisites": [
+        "p2-l4"
+      ],
+      "legacyRefs": [
+        1
+      ],
+      "sources": [
+        "khk"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "기준 중심거리와 작동 중심거리·작동 압력각을 구분한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Diagnosis",
+        "prompt": "중심거리를 늘려도 유지되는 것은?",
+        "choices": [
+          "기초원",
+          "작동 압력각",
+          "작동원 지름"
+        ],
+        "answer": 0,
+        "reasons": [
+          "기초원은 생성 치형으로 정해진다.",
+          "작동 압력각은 증가한다.",
+          "작동원은 조립 중심거리에 따라 변한다."
+        ]
+      },
+      "theoryParagraphs": [
+        "백래시 감량이 없는 외접 평기어쌍의 이상적 치두께 일치 조건은 invα_w=invα+2(x₁+x₂)tanα/(z₁+z₂)이다. 여기서 invα=tanα−α이며 각은 rad로 계산한다. 이를 풀어 α_w를 구하고 a_w=a cosα/cosα_w로 중심거리를 정한다.",
+        "따라서 a_w=a+m(x₁+x₂)는 일반적인 정확식이 아니다. 중심거리를 먼저 정한 조립 변경 문제와 전위 합을 먼저 정한 설계 문제는 입력 조건이 다르다. 백래시 감량, 치끝 단축, 치끝 두께, 간섭은 각각 별도 확인한다."
+      ]
+    },
+    {
+      "id": "p3-l1",
+      "part": 3,
+      "chapter": "p3-c1",
+      "title": "호빙의 창성 운동 | Hobbing",
+      "objectives": [
+        "호브 시작 수와 공작물 잇수로 기본 동기비를 계산한다."
+      ],
+      "context": "공구 교환 후 동기 설정과 가공 피치를 이해하는 기초다.",
+      "theory": "호브는 나사 형태의 다날 창성 공구이다. 회전하는 호브와 공작물의 위상 관계가 치형을 만들며 축방향 이송이 치폭을 가공한다. 주로 외치 원통기어를 가공하며 내치는 일반 호빙으로 접근하기 어렵다.",
+      "formula": {
+        "expression": "|n_w| = |n_h|S/z_w",
+        "definitions": "n_h,n_w: rpm; S: 호브 시작 수, z_w: 공작물 잇수. 평기어 기본 창성 비; 헬리컬 이송 차동과 방향 부호 제외."
+      },
+      "diagram": "hobbing",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "S=2, z_w=50, n_h=1000 rpm → n_w=1000×2/50=40 rpm",
+          "호브가 1회전하면 공작물은 2/50=0.04회전"
+        ]
+      },
+      "application": "S와 플루트(Flute) 수를 공구 데이터에서 별도 확인한다.",
+      "limitations": "공구 등급·소재·강성·절삭유·장비 허용 범위를 확인해야 하며 이 비는 NC 설정 절차가 아니다.",
+      "mistakes": [
+        "날 수를 시작 수로 입력한다."
+      ],
+      "prerequisites": [
+        "p2-l5"
+      ],
+      "legacyRefs": [
+        4
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "호브 시작 수와 공작물 잇수로 기본 동기비를 계산한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Recall",
+        "prompt": "2-start 호브, 50T, 1000 rpm의 기본 공작물 속도는?",
+        "choices": [
+          "25000 rpm",
+          "40 rpm",
+          "25 rpm"
+        ],
+        "answer": 1,
+        "reasons": [
+          "구동비를 뒤집은 값이다.",
+          "1000×2/50이다.",
+          "시작 수를 반영하지 않은 다른 비다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "2-start 호브 1000 rpm, 50T 소재의 기본 회전수",
+        "answer": 40,
+        "unit": "rpm",
+        "tolerance": 0.01,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "1000×2/50=40 rpm"
+      },
+      "theoryParagraphs": [
+        "공작물의 한 피치 분할각은 2π/z_w이다. S-start 호브가 한 회전하면 기본 랙에 대응하는 S개의 피치가 진행되므로 공작물 각도는 2πS/z_w만큼 변한다. 이 비가 평균 기본 회전비 S/z_w가 된다.",
+        "헬리컬의 축방향 이송은 치선 방향을 따라 추가 회전 위상 변화를 필요로 할 수 있다. 실제 장비의 차동/전자기어 구현은 공구 설치각·손잡이·이송 좌표를 포함하므로 기본 회전비만으로 NC 값을 생성하지 않는다."
+      ]
+    },
+    {
+      "id": "p3-l2",
+      "part": 3,
+      "chapter": "p3-c1",
+      "title": "셰이핑·밀링·형상 절삭 | Shaping & form cutting",
+      "objectives": [
+        "창성과 형상 복사를 구분하고 내치 접근성을 판단한다."
+      ],
+      "context": "형상·생산량에 따른 공정 선택의 근거가 된다.",
+      "theory": "셰이핑(Shaping)은 피니언형 공구의 왕복 절삭과 공구/공작물 동기 회전으로 창성한다. 내치에 적용 가능하지만 복귀·간섭 여유가 필요하다. 형상 밀링(Form milling)은 치홈 형상의 커터로 하나씩 절삭하고 분할하며, 창성 운동으로 치형을 만드는 방법과 다르다.",
+      "formula": {
+        "expression": "|n_w/n_c| = z_c/z_w; Δθ_index = 360°/z_w",
+        "definitions": "n: 평균 창성 회전수(rpm), z: 잇수; c: 피니언 공구. 분할각은 형상 절삭의 이상적 동일 간격."
+      },
+      "diagram": "shaping",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "형상 절삭 z_w=40 → 분할각 9°",
+          "셰이퍼 z_c=20, z_w=40 → 회전비 크기 0.5"
+        ]
+      },
+      "application": "내치 어깨부와 공구 복귀 여유를 검토하고 셰이핑과 호빙의 상대운동을 비교한다.",
+      "limitations": "피니언 공구의 간섭과 헬리컬 가이드 조건은 별도 검토한다. 전용 커터 형상은 잇수 범위를 가진다.",
+      "mistakes": [
+        "모듈만 같으면 형상 커터가 모든 잇수에서 정확한 인벌류트를 만든다고 생각한다."
+      ],
+      "prerequisites": [
+        "p3-l1"
+      ],
+      "legacyRefs": [
+        4
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "창성과 형상 복사를 구분하고 내치 접근성을 판단한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Understanding",
+        "prompt": "형상 밀링의 주요 운동은?",
+        "choices": [
+          "호브 시작 수 기반 연속 창성",
+          "교차축 동기회전만",
+          "한 치홈 절삭 후 분할"
+        ],
+        "answer": 2,
+        "reasons": [
+          "호빙의 기본 특성이다.",
+          "스카이빙의 특성이다.",
+          "절삭 형상과 분할 정밀도가 핵심이다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "40T 형상 절삭의 분할각",
+        "answer": 9,
+        "unit": "°",
+        "tolerance": 0.01,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "360/40=9°"
+      }
+    },
+    {
+      "id": "p3-l3",
+      "part": 3,
+      "chapter": "p3-c1",
+      "title": "파워 스카이빙 | Power skiving",
+      "objectives": [
+        "교차축 동기회전으로 절삭속도를 만드는 원리를 설명한다."
+      ],
+      "context": "내치 생산성과 어깨부 접근성을 검토할 때 필요하다.",
+      "theory": "공구축과 공작물축 사이 교차각(Crossing angle)이 회전 표면의 상대속도에 절삭 성분을 만든다. 동기 회전과 축방향 이송이 창성에 결합된다. 내치와 외치 모두 가능하나 공구 설계·간섭·장비 강성과 고속 동기 성능이 제약이다.",
+      "formula": {
+        "expression": "v_rel = v_c − v_w; |n_w/n_c| = z_c/z_w (기본 분할 비)",
+        "definitions": "v: 접촉점 속도 벡터(m/s). c: 공구, w: 공작물; 기본 비에 실제 헬릭스·이송 보정 제외."
+      },
+      "diagram": "skiving",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "가정 z_c=30, z_w=90 → 기본 회전비 크기=1/3",
+          "n_c=900 rpm → 기본 n_w 크기=300 rpm",
+          "이 값만으로 상대 절삭속도는 산정 불가: 접촉점·축 방향이 필요"
+        ]
+      },
+      "application": "공구/척 간섭, 교차각, 공작물 강성과 동기 추종 로그를 함께 확인한다.",
+      "limitations": "회전 방향·추가 보정과 절삭속도는 공구 설계·장비 운동학으로 정한다.",
+      "mistakes": [
+        "호빙의 시작 수 공식을 스카이빙에 그대로 적용한다."
+      ],
+      "prerequisites": [
+        "p3-l2"
+      ],
+      "legacyRefs": [
+        4
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "교차축 동기회전으로 절삭속도를 만드는 원리를 설명한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Application",
+        "prompt": "내치 스카이빙 검토에서 우선 확인할 것은?",
+        "choices": [
+          "공구 접근·간섭·동기 성능",
+          "호브 플루트 수만",
+          "도면 없이 최대 회전수"
+        ],
+        "answer": 0,
+        "reasons": [
+          "적용 가능성과 품질을 결정하는 조건이다.",
+          "스카이빙의 운동학을 설명하지 못한다.",
+          "임의 최대속도는 검증 계획이 아니다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "30T 스카이빙 공구 900 rpm, 90T 소재의 기본 회전수 크기",
+        "answer": 300,
+        "unit": "rpm",
+        "tolerance": 0.1,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "900×30/90=300 rpm"
+      },
+      "theoryParagraphs": [
+        "회전 속도 벡터는 각 축에 대해 v=ω×r로 쓸 수 있다. 공구/공작물의 접촉점 위치와 축 방향이 다르므로 상대속도는 두 벡터의 차다. 교차각은 이 상대속도의 유효 절삭 성분을 만든다.",
+        "내치 가공은 공구가 링 내부에 들어갈 수 있어야 한다. 작은 내경·어깨·척·공구 돌출은 접근·충돌·강성 제약을 만든다. 소재 경도와 공구 재종에 따른 적용 범위도 장비/공구 제조사의 검증 자료로 확인한다."
+      ]
+    },
+    {
+      "id": "p3-l4",
+      "part": 3,
+      "chapter": "p3-c2",
+      "title": "모따기·디버링·정삭 | Finishing",
+      "objectives": [
+        "Shaving·Grinding·Honing의 제거 원리와 열처리 순서를 비교한다."
+      ],
+      "context": "열처리 후 품질을 확보할 공정과 가공 여유를 결정한다.",
+      "theory": "모따기(Chamfering)는 가장자리 형상, 디버링(Deburring)은 돌출 버 제거가 목적이다. 셰이빙(Shaving)은 절삭날을 가진 맞물림 커터로 통상 경화 전 미량 제거한다. 연삭(Grinding)은 숫돌로 경화 후 치형을 정밀 가공할 수 있다. 호닝(Honing)은 연마 맞물림으로 표면·미세 형상을 개선하며 큰 오차 보정 능력은 제한된다.",
+      "formula": {
+        "expression": "A_remain = A_stock − A_removed",
+        "definitions": "A: 해당 치면 법선 방향 가공 여유(mm). 동일 기준에서 비교한 계획용 길이 수지."
+      },
+      "diagram": "process",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "가정 치면 여유 0.15 mm, 제거 0.10 mm → 잔여 0.05 mm",
+          "이는 합격 기준이 아니라 후공정 여유 추적 예제"
+        ]
+      },
+      "application": "경도·형상·장비·표면 요구를 확인하고 침탄 유효층을 보존할 제거량을 계획한다.",
+      "limitations": "실제 제거 한계·연삭 번·균열·층 깊이는 공구/열처리 사양과 검사로 확인한다.",
+      "mistakes": [
+        "호닝이면 큰 피치·런아웃 오차도 모두 수정된다고 생각한다."
+      ],
+      "prerequisites": [
+        "p3-l3"
+      ],
+      "legacyRefs": [
+        4
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "Shaving·Grinding·Honing의 제거 원리와 열처리 순서를 비교한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Diagnosis",
+        "prompt": "통상 경화 전 절삭 정삭에 해당하는 공정은?",
+        "choices": [
+          "디버링만",
+          "셰이빙",
+          "경화 후 연삭만"
+        ],
+        "answer": 1,
+        "reasons": [
+          "버 제거는 치형 정밀 정삭과 목적이 다르다.",
+          "절삭 커터와 소재 경도 호환이 필요하다.",
+          "연삭은 경화 후 정삭에도 적용된다."
+        ]
+      }
+    },
+    {
+      "id": "p3-l5",
+      "part": 3,
+      "chapter": "p3-c2",
+      "title": "공정 선택과 절삭 조건 | Process planning",
+      "objectives": [
+        "단위가 정의된 절삭속도를 계산하고 공정 변경 검증을 계획한다."
+      ],
+      "context": "조건 변경은 가공시간뿐 아니라 발열·공구수명·품질을 바꾼다.",
+      "theory": "소재→기준면→치 절삭→모따기/디버링→필요 시 열처리→기준면/치 정삭→검사의 흐름을 제품별로 설계한다. 절삭속도는 절삭날과 소재의 상대속도이며 기어 창성 공정에서는 단일 회전 원주속도만으로 충분하지 않을 수 있다.",
+      "formula": {
+        "expression": "V_c = πDn/1000; v_f = f_z z_edge n",
+        "definitions": "D: mm, n: rpm, V_c: m/min; f_z: mm/날, v_f: mm/min, z_edge: 유효 날 수. 단순 회전 밀링 모델."
+      },
+      "diagram": "process",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "D=80 mm, n=600 rpm → V_c=150.796 m/min",
+          "가정 f_z=0.05 mm/날, z_edge=4 → v_f=120 mm/min"
+        ]
+      },
+      "application": "절삭 조건 추천은 공구 제조사 범위·소재·기계 제약을 먼저 확인한다.",
+      "limitations": "밀링 날당 이송을 호빙 축방향 이송(mm/공작물 회전)으로 대체할 수 없다.",
+      "mistakes": [
+        "스카이빙 상대 절삭속도를 πDn만으로 확정한다."
+      ],
+      "prerequisites": [
+        "p3-l4"
+      ],
+      "legacyRefs": [
+        4
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "단위가 정의된 절삭속도를 계산하고 공정 변경 검증을 계획한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Diagnosis",
+        "prompt": "조건 변경의 품질 검증 계획은?",
+        "choices": [
+          "시간만 비교",
+          "모든 변수를 동시에 최대화",
+          "기준 조건과 한 변수 변경 후 품질·부하 비교"
+        ],
+        "answer": 2,
+        "reasons": [
+          "시간은 품질을 설명하지 못한다.",
+          "원인 분리가 불가능하고 승인 범위를 벗어날 수 있다.",
+          "영향을 분리하고 품질/안전 범위를 검증한다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "D=80 mm, n=600 rpm 단순 회전 모델의 절삭속도",
+        "answer": 150.79645,
+        "unit": "m/min",
+        "tolerance": 0.01,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "π×80×600/1000=150.79645 m/min"
+      }
+    },
+    {
+      "id": "p4-l1",
+      "part": 4,
+      "chapter": "p4-c1",
+      "title": "소재 선정 | Gear materials",
+      "objectives": [
+        "치면 피로·치저 피로·인성을 소재 선정 조건에 연결한다."
+      ],
+      "context": "동일 형상이라도 소재·조직·표면 상태가 수명을 바꾼다.",
+      "theory": "치면은 접촉 피로와 마모, 치저는 굽힘 피로, 심부는 인성을 요구한다. 탄소강·합금강·주철·비철·폴리머는 강도, 감쇠, 부식, 무게, 온도와 비용의 장단점이 있다. 소재 이름만으로 허용 하중을 정하지 않는다.",
+      "formula": {
+        "expression": "σ_nom = F/A",
+        "definitions": "σ_nom: MPa=N/mm², F: N, A: mm². 단순 단면의 평균 응력 예시이며 기어 치저 강도식이 아님."
+      },
+      "diagram": "material",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "가정 F=1000 N, A=50 mm² → σ_nom=20 MPa",
+          "응력집중·피로·치저 형상 때문에 이 값으로 치 강도를 판정하지 않는다."
+        ]
+      },
+      "application": "도면의 소재 규격·청정도·열처리·검사 요구를 함께 읽는다.",
+      "limitations": "수명 설계에는 검증된 기어 강도 규격과 하중 스펙트럼이 필요하다.",
+      "mistakes": [
+        "강종명이나 최고 경도만 보고 수명을 보증한다."
+      ],
+      "prerequisites": [
+        "p3-l5"
+      ],
+      "legacyRefs": [
+        5
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "치면 피로·치저 피로·인성을 소재 선정 조건에 연결한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Recall",
+        "prompt": "소재 선정에 필요한 정보는?",
+        "choices": [
+          "하중·피로·환경·열처리 요구",
+          "표면 색상만",
+          "최고 경도만"
+        ],
+        "answer": 0,
+        "reasons": [
+          "서로 다른 파손 모드의 요구가 있다.",
+          "색상은 충분한 소재 검증이 아니다.",
+          "높은 경도가 인성과 수명을 항상 보장하지 않는다."
+        ]
+      }
+    },
+    {
+      "id": "p4-l2",
+      "part": 4,
+      "chapter": "p4-c1",
+      "title": "침탄·담금질·템퍼링 | Case hardening",
+      "objectives": [
+        "침탄과 담금질·뜨임의 목적을 분리한다."
+      ],
+      "context": "표면 경도와 심부 인성의 균형을 이해한다.",
+      "theory": "침탄(Carburizing)은 표면 탄소 농도를 높이는 확산 처리이며 경도 확보에는 후속 담금질(Quenching) 등 조직 변화가 필요하다. 뜨임/템퍼링(Tempering)은 담금질 조직의 응력·취성·성질을 조정한다. 유효 경화층 깊이는 규정된 경도 기준과 시험법을 필요로 한다.",
+      "formula": {
+        "expression": "확산 특성 길이 ℓ ∝ √(Dt)",
+        "definitions": "ℓ: 길이, D: 확산계수(길이²/시간), t: 시간. 일정 D의 확산 스케일링; 실제 침탄 레시피/층 깊이 예측식이 아님."
+      },
+      "diagram": "material",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "온도·D가 일정하다고 가정하면 t를 4배 → ℓ 비=√4=2",
+          "탄소 포텐셜·경계 조건·조직 변화 때문에 실제 유효층이 정확히 2배라는 보장은 없다."
+        ]
+      },
+      "application": "소재·층 깊이·경도 범위·후가공 제거량을 열처리 사양에 연결한다.",
+      "limitations": "처리 온도·시간·담금질 매체는 승인된 열처리 절차를 따른다.",
+      "mistakes": [
+        "침탄 자체와 담금질을 같은 과정으로 설명한다."
+      ],
+      "prerequisites": [
+        "p4-l1"
+      ],
+      "legacyRefs": [
+        5
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "침탄과 담금질·뜨임의 목적을 분리한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Understanding",
+        "prompt": "침탄의 직접 목적은?",
+        "choices": [
+          "치형 절삭",
+          "표면 탄소 농도 증가",
+          "항상 잔류응력 제거"
+        ],
+        "answer": 1,
+        "reasons": [
+          "절삭 공정이 아니다.",
+          "확산으로 표면 조성을 바꾼다.",
+          "응력 상태는 후속 처리와 구속에 의존한다."
+        ]
+      }
+    },
+    {
+      "id": "p4-l3",
+      "part": 4,
+      "chapter": "p4-c1",
+      "title": "유도경화와 경도 | Induction & hardness",
+      "objectives": [
+        "유도경화와 침탄의 차이 및 경도 시험 조건을 설명한다."
+      ],
+      "context": "강종·기어 크기·요구 경화 패턴에 따라 방법을 선택한다.",
+      "theory": "유도경화(Induction hardening)는 전자기 유도에 의한 표면 가열과 담금질로 경화하며 탄소 농도 증가 공정이 아니다. 경도(Hardness)는 압입 시험 등 지정 방법의 결과로 시험 스케일·하중·위치를 함께 기록한다.",
+      "formula": {
+        "expression": "δ = √[2ρ/(ωμ)]",
+        "definitions": "δ: m, ρ: Ω·m, ω: rad/s, μ: H/m. 균질 선형 도체의 전자기 표피 깊이 모델; 실제 경화층 깊이식이 아님."
+      },
+      "diagram": "material",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "ρ와 μ가 일정한 가상 모델에서 주파수 f를 4배 → δ 비=1/√4=0.5",
+          "온도·투자율·열전도로 실제 경화층은 별도 시험한다."
+        ]
+      },
+      "application": "도면의 경화 영역과 표면/심부 경도 시험 위치를 확인한다.",
+      "limitations": "HRC와 HV를 단순 상수 배율로 변환하지 않는다.",
+      "mistakes": [
+        "표피 깊이를 그대로 경화층 깊이라고 보고한다."
+      ],
+      "prerequisites": [
+        "p4-l2"
+      ],
+      "legacyRefs": [
+        5
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "유도경화와 침탄의 차이 및 경도 시험 조건을 설명한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Application",
+        "prompt": "유도경화와 침탄을 구분하는 설명은?",
+        "choices": [
+          "둘 다 반드시 같은 층 깊이",
+          "유도경화는 측정법",
+          "유도경화는 표면 탄소 확산을 목적으로 하지 않는다"
+        ],
+        "answer": 2,
+        "reasons": [
+          "깊이는 조건과 소재에 의존한다.",
+          "경화 공정이지 경도 측정법이 아니다.",
+          "가열 방식과 소재 조직 변화를 이용한다."
+        ]
+      }
+    },
+    {
+      "id": "p4-l4",
+      "part": 4,
+      "chapter": "p4-c2",
+      "title": "잔류응력과 열처리 변형 | Distortion",
+      "objectives": [
+        "열·상변태·구속에 따른 변형 가설을 세운다."
+      ],
+      "context": "열처리 후 치형과 런아웃 변화의 원인을 조사한다.",
+      "theory": "온도 구배와 조직 변태의 체적 변화가 불균일하면 변형과 잔류응력(Residual stress)이 생긴다. 순수 열팽창과 영구 변형을 구분한다. 연삭 후에도 잔류응력과 표면 손상 검토가 필요하다.",
+      "formula": {
+        "expression": "ΔL = α_L L ΔT",
+        "definitions": "ΔL,L: mm, α_L: K⁻¹, ΔT: K. 균일 온도·자유 팽창·상수 계수의 선형 모델."
+      },
+      "diagram": "distortion",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "교육용 가정 α_L=12×10⁻⁶ K⁻¹, L=100 mm, ΔT=20 K",
+          "ΔL=12×10⁻⁶×100×20=0.024 mm"
+        ]
+      },
+      "application": "전후 온도와 기준축이 일치하는 측정으로 영구 변화와 온도 효과를 구분한다.",
+      "limitations": "예제 계수는 소재 인증값이 아니다. 구속·비균일 온도·상변태를 예측하지 않는다.",
+      "mistakes": [
+        "차가운 부품과 뜨거운 부품의 차이를 모두 영구 변형으로 단정한다."
+      ],
+      "prerequisites": [
+        "p4-l3"
+      ],
+      "legacyRefs": [
+        5
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "열·상변태·구속에 따른 변형 가설을 세운다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Diagnosis",
+        "prompt": "먼저 확보할 비교 조건은?",
+        "choices": [
+          "온도·기준축·동일 측정 방법",
+          "열처리 시간만",
+          "관찰자 느낌만"
+        ],
+        "answer": 0,
+        "reasons": [
+          "측정 조건 효과를 분리한다.",
+          "시간만으로 변형 원인을 결정할 수 없다.",
+          "재현 가능한 증거가 아니다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "α_L=12×10⁻⁶/K,L=100 mm,ΔT=20 K의 자유 팽창",
+        "answer": 0.024,
+        "unit": "mm",
+        "tolerance": 0.0001,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "12×10⁻⁶×100×20=0.024 mm"
+      }
+    },
+    {
+      "id": "p4-l5",
+      "part": 4,
+      "chapter": "p4-c2",
+      "title": "열처리 전후 가공 | Stock & correction",
+      "objectives": [
+        "후가공 여유와 경화층 보존 조건을 연결한다."
+      ],
+      "context": "열처리 전 양품만으로 완성품 품질을 보증할 수 없다.",
+      "theory": "열처리 전 치형 생성은 소재 가공성을 활용한다. 열처리 후에는 변형된 기준면과 치면을 정삭한다. 형상 보정(Correction)은 측정된 체계적 편차를 설계/공정과 연결해야 하며 무조건 반대값을 넣는 작업이 아니다.",
+      "formula": {
+        "expression": "h_remaining ≈ h_case − Δh_removed",
+        "definitions": "h: mm. 같은 법선 방향 기준의 층 깊이/제거량 수지 근사; 경도 분포와 최종 시험은 별도."
+      },
+      "diagram": "process",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "가상 초기 층 깊이 0.8 mm, 제거량 0.15 mm → 잔여 약 0.65 mm",
+          "이는 도면 요구 만족 여부를 판단할 실제 경도 시험을 대체하지 못한다."
+        ]
+      },
+      "application": "기준면 재가공→치 정삭→층 깊이/표면 손상/기어 정밀도 검사를 연결한다.",
+      "limitations": "유효층은 경도 기준으로 정의되므로 단순 뺄셈은 공정 계획 근사다.",
+      "mistakes": [
+        "연삭량을 늘리면 품질이 항상 좋아진다고 생각한다."
+      ],
+      "prerequisites": [
+        "p4-l4"
+      ],
+      "legacyRefs": [
+        5
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "후가공 여유와 경화층 보존 조건을 연결한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Diagnosis",
+        "prompt": "후가공 제거량 증가 시 확인할 위험은?",
+        "choices": [
+          "기초원이 자동 확대",
+          "경화층 감소와 표면 손상",
+          "잇수가 자동 증가"
+        ],
+        "answer": 1,
+        "reasons": [
+          "기초원은 의도한 설계 기하와 관련된다.",
+          "제거와 열손상의 영향을 검증한다.",
+          "잇수는 자동 변경되지 않는다."
+        ]
+      }
+    },
+    {
+      "id": "p5-l1",
+      "part": 5,
+      "chapter": "p5-c1",
+      "title": "도면·기준·측정 불확도 | Drawing & datum",
+      "objectives": [
+        "기어 제원과 측정 기준 및 판정 근거를 읽는다."
+      ],
+      "context": "서로 다른 기준축의 결과를 공정 이상으로 오인하지 않기 위해 필요하다.",
+      "theory": "도면 리비전·단위·기준(Datum), z, m_n/m_t, α_n/α_t, β, 손잡이, b, x, 수정치형과 공차 적용 규격을 확인한다. 교정(Calibration)은 표준과 지시값의 관계를 확인하는 것이며 조정(Adjustment)과 다르다. 반복성만으로 측정 정확성을 보증하지 않는다.",
+      "formula": {
+        "expression": "e = I − R; u_c = √Σu_i²",
+        "definitions": "e: 지시오차, I: 지시값, R: 기준값(동일 단위). u_c: 독립 성분의 합성 표준불확도; 상관 성분 제외."
+      },
+      "diagram": "metrology",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "기준 10.000 mm, 지시 10.003 mm → e=+0.003 mm",
+          "가정 독립 u₁=2 μm,u₂=3 μm → u_c=√13=3.606 μm"
+        ]
+      },
+      "application": "합격 판정에는 도면 한계와 합의된 불확도 의사결정 규칙이 필요하다.",
+      "limitations": "불확도 산정에는 온도·기준·정렬·측정 방법과 상관을 포함한다.",
+      "mistakes": [
+        "같은 숫자가 반복되면 교정이 필요 없다고 생각한다."
+      ],
+      "prerequisites": [
+        "p4-l5"
+      ],
+      "legacyRefs": [
+        2
+      ],
+      "sources": [
+        "iso1",
+        "iso2",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "기어 제원과 측정 기준 및 판정 근거를 읽는다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Recall",
+        "prompt": "교정과 조정의 차이는?",
+        "choices": [
+          "동일한 작업",
+          "둘 다 임의 공차 변경",
+          "교정은 기준과 관계 확인, 조정은 장비 지시 변경"
+        ],
+        "answer": 2,
+        "reasons": [
+          "조정 후 다시 교정할 수 있다.",
+          "도면 공차 변경 권한과 무관하다.",
+          "관계 확인과 변경은 구분해야 한다."
+        ]
+      }
+    },
+    {
+      "id": "p5-l2",
+      "part": 5,
+      "chapter": "p5-c1",
+      "title": "치형·치선 편차 | Profile & helix",
+      "objectives": [
+        "프로파일과 치선 그래프의 축과 기준을 해석한다."
+      ],
+      "context": "편차 형태를 공구·셋업·열변형 가설에 연결한다.",
+      "theory": "치형(Profile)은 정면 치의 곡선 방향, 치선/헬릭스(Lead/Helix)는 치폭 방향의 편차를 평가한다. 설계 수정치형을 기준으로 하는 총·기울기·형상 편차를 구분한다. 같은 기울기라도 원인은 공구, 축 정렬, 보정, 열 등 여러 가지일 수 있다.",
+      "formula": {
+        "expression": "R_sample = max(e_i) − min(e_i)",
+        "definitions": "e_i,R: μm. 표본 범위 계산이며 ISO 총 편차 산정 알고리즘을 대체하지 않음."
+      },
+      "diagram": "metrology",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "가상 치선 표본 [−4,−2,0,2,4] μm → 범위=4−(−4)=8 μm",
+          "단조 기울기 형태이나 기준·설계 수정·평가 길이 확인이 먼저다."
+        ]
+      },
+      "application": "좌우 치면, 잇수 위치, 평가 범위·필터·제외 구간을 함께 기록한다.",
+      "limitations": "필터·평가 범위가 다르면 결과가 달라진다. 본 예제는 교육용 합성 데이터다.",
+      "mistakes": [
+        "치선 기울기 하나로 서보 고장을 확정한다."
+      ],
+      "prerequisites": [
+        "p5-l1"
+      ],
+      "legacyRefs": [
+        2
+      ],
+      "sources": [
+        "iso1",
+        "iso2",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "프로파일과 치선 그래프의 축과 기준을 해석한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Understanding",
+        "prompt": "선형 치선 편차를 관찰한 다음 단계는?",
+        "choices": [
+          "기준/정렬/공구/온도 가설 비교",
+          "즉시 서보 교체",
+          "프로파일 합격이면 무시"
+        ],
+        "answer": 0,
+        "reasons": [
+          "증거로 가설을 좁힌다.",
+          "하나의 관측은 부품 고장 증명이 아니다.",
+          "치형과 치선은 다른 항목이다."
+        ]
+      },
+      "theoryParagraphs": [
+        "총 편차는 기울기와 형상의 영향을 함께 포함할 수 있으나 규격별 평가 선·평가 길이·제외 구간을 사용해야 한다. 단순 표본 최대−최소는 원시 데이터 이해에 유용하지만 그 자체를 Fα 또는 Fβ의 공식 평가값으로 명명하면 안 된다.",
+        "치형의 균일한 기울기와 치선의 균일한 기울기는 서로 다른 좌표 방향이다. 공구 형상/설치, 기계 정렬, 의도한 수정치형, 측정 기준과 온도 변화를 비교하며 동일 형상 패턴이 단일 원인을 의미하지 않는다."
+      ]
+    },
+    {
+      "id": "p5-l3",
+      "part": 5,
+      "chapter": "p5-c1",
+      "title": "피치·런아웃 | Pitch & runout",
+      "objectives": [
+        "분할 위치 오차와 기준축에 대한 흔들림을 분리한다."
+      ],
+      "context": "주기적 소음과 고정 편심을 조사할 때 필요하다.",
+      "theory": "단일 피치 편차는 인접 치 간격, 누적 피치 편차는 여러 치의 위치 관계를 평가한다. 런아웃(Runout)은 지정 기준축에 대한 반경 변동이며 치홈 접촉 방식도 영향을 준다. 단순 편심 모델에서는 회전당 한 번의 정현파가 나타난다.",
+      "formula": {
+        "expression": "TIR = I_max − I_min; e(θ)=E cos θ",
+        "definitions": "TIR,I,E: μm; θ: rad. TIR=2E는 순수 편심 원형 표면, 이상적 측정에 한정."
+      },
+      "diagram": "runout",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "최대 +24 μm, 최소 −16 μm → TIR=40 μm",
+          "순수 편심만 있다는 별도 증거가 있을 때 E=20 μm"
+        ]
+      },
+      "application": "재척킹과 기준면 청소 전후 동일 기준 측정으로 고정 영향과 부품 영향 비교한다.",
+      "limitations": "형상·기준축·프로브·치홈 오차가 섞이면 TIR/2는 실제 편심이 아니다.",
+      "mistakes": [
+        "모든 런아웃을 피치 불량이라고 부른다."
+      ],
+      "prerequisites": [
+        "p5-l2"
+      ],
+      "legacyRefs": [
+        2
+      ],
+      "sources": [
+        "iso1",
+        "iso2",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "분할 위치 오차와 기준축에 대한 흔들림을 분리한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Application",
+        "prompt": "TIR 40 μm를 편심 20 μm로 단정할 수 있는가?",
+        "choices": [
+          "잇수가 짝수일 때 항상 가능",
+          "순수 편심 모델이 확인될 때만",
+          "항상 가능"
+        ],
+        "answer": 1,
+        "reasons": [
+          "잇수 짝수 조건만으로 충분하지 않다.",
+          "측정과 형상 조건이 필요하다.",
+          "여러 오차 성분이 섞일 수 있다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "지시 최대 +24 μm, 최소 −16 μm의 TIR",
+        "answer": 40,
+        "unit": "μm",
+        "tolerance": 0.01,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "24−(−16)=40 μm"
+      }
+    },
+    {
+      "id": "p5-l4",
+      "part": 5,
+      "chapter": "p5-c2",
+      "title": "치두께·단면 맞물림 검사 | Flank testing",
+      "objectives": [
+        "치두께 측정과 Single/Double flank 검사 목적을 구분한다."
+      ],
+      "context": "종합 맞물림 검사와 개별 치면 검사를 혼동하지 않도록 한다.",
+      "theory": "치두께는 걸치기(Span), 핀/볼 등으로 간접 측정하며 제원에 맞는 산식이 필요하다. 단면 맞물림(Single flank)은 한쪽 치면 접촉과 회전 전달 오차를, 양면 맞물림(Double flank)은 양 치면 접촉 상태의 중심거리 변동을 관찰한다. 후자는 운전 백래시 측정과 같지 않다.",
+      "formula": {
+        "expression": "TE = θ_out − θ_in/i",
+        "definitions": "TE: 출력축 기준 전달 오차(rad), θ: 동일 회전 방향 convention으로 정의한 크기 각, i: 감속비. 부호와 각 기준을 사전 정의."
+      },
+      "diagram": "flank",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "i=3, θ_in=0.300 rad, θ_out=0.1002 rad",
+          "TE=0.1002−0.300/3=0.0002 rad =0.2 mrad"
+        ]
+      },
+      "application": "마스터 기어 상태·접촉 하중·백래시·측정 속도 조건을 기록한다.",
+      "limitations": "종합 검사는 개별 프로파일·헬릭스 원인을 독립적으로 분해하지 못한다.",
+      "mistakes": [
+        "양면 검사 중심거리 변동을 실제 운전 백래시라고 보고한다."
+      ],
+      "prerequisites": [
+        "p5-l3"
+      ],
+      "legacyRefs": [
+        2
+      ],
+      "sources": [
+        "iso1",
+        "iso2",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "치두께 측정과 Single/Double flank 검사 목적을 구분한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Diagnosis",
+        "prompt": "양면 맞물림 검사가 주로 관찰하는 값은?",
+        "choices": [
+          "표면 경도",
+          "축 윤활 점도",
+          "중심거리 변동"
+        ],
+        "answer": 2,
+        "reasons": [
+          "경도 시험은 별도다.",
+          "윤활 점도 시험은 별도다.",
+          "양 치면 접촉에서 반경 종합 특성을 관찰한다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "i=3,θ_in=0.300 rad,θ_out=0.1002 rad의 TE",
+        "answer": 0.2,
+        "unit": "mrad",
+        "tolerance": 0.001,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "(0.1002−0.300/3)×1000=0.2 mrad"
+      }
+    },
+    {
+      "id": "p5-l5",
+      "part": 5,
+      "chapter": "p5-c2",
+      "title": "규격과 품질 판정 | Standards scope",
+      "objectives": [
+        "ISO 규격의 범위와 도면 판정 조건을 확인한다."
+      ],
+      "context": "등급 번호만으로 모든 기어의 합격을 판단하지 않는다.",
+      "theory": "ISO 1328-1:2013은 원통기어 치면 공차 분류의 정의와 허용값 범위를 다룬다. ISO 1328-2:2020은 Double flank radial composite deviations의 정의와 허용값을 다룬다. 판본·적용 지름/모듈 범위·평가 길이·측정 조건을 정식 문서에서 확인해야 한다. 이 앱은 공차표를 복제하거나 자동 판정하지 않는다.",
+      "formula": {
+        "expression": "margin = L_spec − M_eval",
+        "definitions": "L_spec: 승인된 도면 한계, M_eval: 해당 규격으로 평가한 값(동일 단위). 불확도 판정 규칙 별도."
+      },
+      "diagram": "metrology",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "가상 도면 한계 10 μm, 평가값 8 μm → 단순 여유 2 μm",
+          "이 가상 한계는 ISO 등급 허용값이 아니다; 불확도/판정 규칙 확인 필요"
+        ]
+      },
+      "application": "검사 보고서에 규격 번호·판본·항목·등급·단위를 명시한다.",
+      "limitations": "ISO 1328의 등급은 강도·소음·전체 장비 성능 보증이 아니다. 표준 원문 세부조항 검토 전 출판 승인하지 않는다.",
+      "mistakes": [
+        "DIN/AGMA 등급 번호를 숫자만으로 ISO와 동일시한다."
+      ],
+      "prerequisites": [
+        "p5-l4"
+      ],
+      "legacyRefs": [
+        2
+      ],
+      "sources": [
+        "iso1",
+        "iso2",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "ISO 규격의 범위와 도면 판정 조건을 확인한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Diagnosis",
+        "prompt": "합격 판정에 필요한 근거는?",
+        "choices": [
+          "도면 규격·판본·평가 항목·판정 규칙",
+          "앱의 임의 등급표",
+          "다른 회사의 등급 숫자만"
+        ],
+        "answer": 0,
+        "reasons": [
+          "같은 정의로 측정하고 판정해야 한다.",
+          "확인되지 않은 표를 사용하면 안 된다.",
+          "등급 체계와 적용 범위가 다를 수 있다."
+        ]
+      }
+    },
+    {
+      "id": "p6-l1",
+      "part": 6,
+      "chapter": "p6-c1",
+      "title": "CNC 구성과 서보 | Machine architecture",
+      "objectives": [
+        "주축·이송축·서보·엔코더의 역할을 구분한다."
+      ],
+      "context": "기계 상태·제어 상태·측정 상태를 분리해 장애를 조사한다.",
+      "theory": "주축(Spindle)은 공구/소재 회전을, 이송축(Feed axis)은 상대 위치를 만든다. 서보(Servo)는 지령과 피드백 차이를 줄이며 엔코더(Encoder)는 위치/회전을 감지한다. CNC의 경로 제어와 PLC 인터록은 역할이 다르다.",
+      "formula": {
+        "expression": "e_f = q_command − q_feedback",
+        "definitions": "q,e_f: 축 기준 mm 또는 회전축 °. 같은 시간·좌표·단위."
+      },
+      "diagram": "servo",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "q_command=125.000 mm, q_feedback=124.965 mm",
+          "e_f=+0.035 mm"
+        ]
+      },
+      "application": "축명·시간·좌표계·샘플링 조건을 로그에 기록한다.",
+      "limitations": "피드백 정상도 기계 출력단 정밀도 정상의 충분조건은 아니다.",
+      "mistakes": [
+        "엔코더가 보는 위치와 실제 치면 위치가 항상 같다고 생각한다."
+      ],
+      "prerequisites": [
+        "p5-l5"
+      ],
+      "legacyRefs": [
+        6
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "주축·이송축·서보·엔코더의 역할을 구분한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Recall",
+        "prompt": "추종 편차를 비교할 때 필요한 것은?",
+        "choices": [
+          "모터 모델 이름만",
+          "동일 시각·좌표계·단위",
+          "서로 다른 시각의 최대값만"
+        ],
+        "answer": 1,
+        "reasons": [
+          "모델명만으로 실제 상태를 알 수 없다.",
+          "같은 물리량의 차이를 계산해야 한다.",
+          "위상 차이가 가짜 오차를 만든다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "지령125.000 mm,피드백124.965 mm의 편차",
+        "answer": 0.035,
+        "unit": "mm",
+        "tolerance": 0.0001,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "125.000−124.965=0.035 mm"
+      }
+    },
+    {
+      "id": "p6-l2",
+      "part": 6,
+      "chapter": "p6-c1",
+      "title": "전자기어와 동기 운동 | Electronic gearing",
+      "objectives": [
+        "동기비와 위상 오차를 정의한다."
+      ],
+      "context": "기어 창성에서는 평균 속도뿐 아니라 순간 위상 관계가 치형에 영향을 준다.",
+      "theory": "전자기어(Electronic gearing)는 마스터 위치와 슬레이브 위치의 관계를 제어한다. 기계 감속비·엔코더 변환·좌표·방향을 반영해야 한다. 속도 평균이 맞아도 주기적 위상 오차가 품질에 영향을 줄 수 있다.",
+      "formula": {
+        "expression": "e_sync = θ_w − kθ_c − θ₀",
+        "definitions": "θ,e: rad, k: 부호 포함 동기비, θ₀: 기준 위상. 실제 이송/헬릭스 보정 포함 목표는 장비 모델로 정의."
+      },
+      "diagram": "servo",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "가정 k=0.04, θ₀=0, θ_c=10 rad, θ_w=0.4001 rad",
+          "e_sync=0.0001 rad; 가상 작동 반경 50 mm → 호 변위≈0.005 mm"
+        ]
+      },
+      "application": "시간 정렬된 지령/피드백과 치 위치별 편차를 비교한다.",
+      "limitations": "축 위상 오차와 최종 치면 편차는 강성·공구·접촉에 의해 연결되며 1:1 확정 불가.",
+      "mistakes": [
+        "평균 rpm이 맞으면 동기 오차가 없다고 결론낸다."
+      ],
+      "prerequisites": [
+        "p6-l1"
+      ],
+      "legacyRefs": [
+        6
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "동기비와 위상 오차를 정의한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Understanding",
+        "prompt": "평균 속도는 정상인데 주기 오차가 있다면?",
+        "choices": [
+          "평균 rpm만 다시 확인",
+          "즉시 동기 파라미터 변경",
+          "시간 정렬된 위상/추종 로그 확인"
+        ],
+        "answer": 2,
+        "reasons": [
+          "같은 평균은 주기 오차를 숨긴다.",
+          "원인 검증과 제조사 승인 절차가 먼저다.",
+          "순간 위치 관계를 확인해야 한다."
+        ]
+      },
+      "theoryParagraphs": [
+        "분할 비가 맞아도 두 축의 순간 위상 관계가 흔들리면 공구/소재의 의도한 창성 상대운동이 깨질 수 있다. 지령·피드백의 시간 정렬, 엔코더 좌표 변환과 기계 감속비를 검토해야 한다.",
+        "출력 치면 품질은 구동 신호만의 함수가 아니다. 기계 전달계 탄성, 베어링·공구·고정 강성, 절삭 부하, 열 상태와 계측 시스템을 함께 연결해 검증한다."
+      ]
+    },
+    {
+      "id": "p6-l3",
+      "part": 6,
+      "chapter": "p6-c1",
+      "title": "기하 오차와 운동 오차 | Error separation",
+      "objectives": [
+        "정렬·직각도 등 기하 오차와 추종·위상 오차를 구분한다."
+      ],
+      "context": "고정된 오차와 속도/부하 의존 오차의 가설을 비교한다.",
+      "theory": "기하 오차(Geometric error)는 축의 위치·직진도·직각도 등 관계의 편차이다. 운동 오차(Motion error)는 지령 추종·동기·보간 중의 위치 편차로 볼 수 있다. 열·하중은 두 종류 모두에 영향을 주므로 관측 조건을 바꾸어 비교한다.",
+      "formula": {
+        "expression": "Δy ≈ Lθ",
+        "definitions": "L,Δy: mm, θ: rad. 작은 각도 근사 tanθ≈θ인 단순 정렬 모델."
+      },
+      "diagram": "alignment",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "L=200 mm, θ=20 μrad=20×10⁻⁶ rad",
+          "Δy≈200×20×10⁻⁶=0.004 mm"
+        ]
+      },
+      "application": "정적 정렬 측정과 속도·부하별 로그를 별도 수집한다.",
+      "limitations": "단일 선형 모델은 전체 3차원 기계 오차 체인을 설명하지 않는다.",
+      "mistakes": [
+        "속도 의존 현상을 모두 정렬 오차라고 단정한다."
+      ],
+      "prerequisites": [
+        "p6-l2"
+      ],
+      "legacyRefs": [
+        6
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "정렬·직각도 등 기하 오차와 추종·위상 오차를 구분한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Application",
+        "prompt": "속도 변화에 따라 편차가 달라지면?",
+        "choices": [
+          "동적 추종·열·부하 가설 비교",
+          "기하 오차만 확정",
+          "측정 기준 생략"
+        ],
+        "answer": 0,
+        "reasons": [
+          "조건 의존성을 이용해 가설을 좁힌다.",
+          "정적 원인만으로 충분하지 않다.",
+          "비교 기준이 필요하다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "L=200 mm,θ=20 μrad의 정렬 변위 근사",
+        "answer": 0.004,
+        "unit": "mm",
+        "tolerance": 0.0001,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "200×20×10⁻⁶=0.004 mm"
+      }
+    },
+    {
+      "id": "p6-l4",
+      "part": 6,
+      "chapter": "p6-c2",
+      "title": "교정과 재현 측정 | Calibration practice",
+      "objectives": [
+        "교정·정렬·반복성과 현장 확인 절차를 구분한다."
+      ],
+      "context": "측정 장비 문제를 가공 장비 문제로 오인하지 않도록 한다.",
+      "theory": "기준 아티팩트의 인증, 측정 방향·온도·고정, 반복 결과를 확인한다. 장비 교정/보정은 제조사 절차와 승인된 계측 계획을 따른다. 재척킹 비교는 반복성, 기준 아티팩트 비교는 지시 특성 검토에 도움을 준다.",
+      "formula": {
+        "expression": "mean = Σx_i/N; R = max(x_i) − min(x_i)",
+        "definitions": "x,mean,R: 동일 길이 단위, N: 반복 수. 표본 기술 통계이며 교정 불확도 전체가 아님."
+      },
+      "diagram": "metrology",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "가상 반복값 10.002,10.003,10.001 mm",
+          "평균=10.002 mm; 범위=0.002 mm"
+        ]
+      },
+      "application": "동일 기준 부품의 반복 측정과 다른 장비 교차 측정을 계획한다.",
+      "limitations": "범위가 작아도 체계적 바이어스가 클 수 있다.",
+      "mistakes": [
+        "반복 범위를 바로 총 측정 불확도라고 부른다."
+      ],
+      "prerequisites": [
+        "p6-l3"
+      ],
+      "legacyRefs": [
+        6
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "교정·정렬·반복성과 현장 확인 절차를 구분한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Diagnosis",
+        "prompt": "반복성은 좋지만 기준값과 차이가 있다면?",
+        "choices": [
+          "평균값 삭제",
+          "바이어스·교정 관계 확인",
+          "정확하다고 결론"
+        ],
+        "answer": 1,
+        "reasons": [
+          "데이터를 보존하고 원인을 조사한다.",
+          "일관성과 기준에 대한 정확성은 다르다.",
+          "반복성만으로 충분하지 않다."
+        ]
+      },
+      "diagnosis": {
+        "title": "반복성과 측정 바이어스",
+        "observations": "기준 아티팩트 인증값 10.000 mm. 반복값 10.001/10.002/10.003 mm. 온도와 인증 불확도 미기록.",
+        "hypotheses": [
+          "측정 바이어스",
+          "온도·설치 조건",
+          "기준값 불확도/측정 방향"
+        ],
+        "checks": [
+          "범위 2 μm를 총 불확도로 확정",
+          "반복성이 좋으므로 교정 생략",
+          "아티팩트 인증·온도·측정 방향 확인",
+          "제조사 절차에 따라 교정 관계와 반복성 비교"
+        ],
+        "requiredChecks": [
+          2,
+          3
+        ],
+        "reasons": [
+          "불확도는 다른 성분도 포함한다.",
+          "반복성만으로 정확성을 보증하지 않는다.",
+          "기준의 추적성과 조건이 필요하다.",
+          "지시오차와 반복 산포를 구분한다."
+        ],
+        "steps": [
+          "안전 상태·증거·측정 정의 확인",
+          "기준 조건 재현과 가설별 비교",
+          "제조사 승인 범위의 확인/한 변수 검증",
+          "동일 조건 재측정과 도면 기준 판정"
+        ],
+        "order": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "caveat": "관측은 합성 사례입니다. 특정 장비의 고장 확정·조작 지시가 아닙니다."
+      }
+    },
+    {
+      "id": "p6-l5",
+      "part": 6,
+      "chapter": "p6-c2",
+      "title": "Alarm → Hypothesis → Diagnosis → Verification",
+      "objectives": [
+        "알람·관측·가설·확인·검증을 구분한다."
+      ],
+      "context": "교체 중심 대응을 증거 중심 FSE 절차로 바꾼다.",
+      "theory": "알람은 제어기가 감지한 조건이며 근본 원인의 확정이 아니다. 관측 사실과 가설을 분리하고 안전 상태에서 승인된 로그·매뉴얼·계측으로 확인한다. 조치 전후 동일 조건과 도면 요구로 검증한다.",
+      "formula": {
+        "expression": "ΔM = M_after − M_before",
+        "definitions": "M: 같은 조건의 측정값; 단위와 기준 고정. 차이가 개선을 뜻하는지는 평가 항목과 한계에 의존."
+      },
+      "diagram": "diagnosis",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "가상 진단 지표 TIR: 전 40 μm, 후 18 μm → ΔM=−22 μm",
+          "도면 한계와 반복 측정·다른 품질 항목 확인 후 결과 판단"
+        ]
+      },
+      "application": "제조사 알람 설명·발생 조건·로그·변경 이력·검증 기준을 보고한다.",
+      "limitations": "인터록 우회·임의 파라미터 변경·활선 작업 절차를 앱에서 제공하지 않는다. 제조사 절차/현장 승인이 우선이다.",
+      "mistakes": [
+        "알람 이름을 부품 교체 지시로 해석한다."
+      ],
+      "prerequisites": [
+        "p6-l4"
+      ],
+      "legacyRefs": [
+        6
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "알람·관측·가설·확인·검증을 구분한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Diagnosis",
+        "prompt": "진단의 적절한 순서는?",
+        "choices": [
+          "파라미터 변경→로그 삭제",
+          "부품 교체→원인 확정",
+          "안전/증거 보존→가설 비교→승인된 확인→동일 조건 검증"
+        ],
+        "answer": 2,
+        "reasons": [
+          "증거를 잃고 승인 조건을 위반한다.",
+          "교체 결과만으로 단일 근본 원인을 보장하지 않는다.",
+          "확인된 근거와 재현 검증이 필요하다."
+        ]
+      },
+      "diagnosis": {
+        "title": "알람과 품질 변화",
+        "observations": "알람 이후 치선 편차 증가가 보고됨. 알람 코드의 제조사 정의, 발생 시점과 변경 이력은 아직 확보되지 않음.",
+        "hypotheses": [
+          "구동/피드백 문제",
+          "공정·공구·고정 조건 변화",
+          "측정 기준 변화"
+        ],
+        "checks": [
+          "동일 조건의 로그·계측·대안 가설 비교",
+          "알람 이름만으로 부품 교체 확정",
+          "안전 인터록 우회로 재현",
+          "제조사 알람 정의·시점·조건·변경 이력 보존"
+        ],
+        "requiredChecks": [
+          0,
+          3
+        ],
+        "reasons": [
+          "알람과 품질의 관계를 검토한다.",
+          "코드 자체는 근본 원인의 증명이 아니다.",
+          "현장 안전/제조사 승인 체계가 우선이다.",
+          "관측 정의와 증거 보존이 출발점이다."
+        ],
+        "steps": [
+          "안전 상태·증거·측정 정의 확인",
+          "기준 조건 재현과 가설별 비교",
+          "제조사 승인 범위의 확인/한 변수 검증",
+          "동일 조건 재측정과 도면 기준 판정"
+        ],
+        "order": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "caveat": "관측은 합성 사례입니다. 특정 장비의 고장 확정·조작 지시가 아닙니다."
+      }
+    },
+    {
+      "id": "p7-l1",
+      "part": 7,
+      "chapter": "p7-c1",
+      "title": "기어 소음 증가 | Noise investigation",
+      "objectives": [
+        "소음 주파수와 운전 조건을 이용해 원인 후보를 비교한다."
+      ],
+      "context": "치형·정렬·윤활·베어링·구조 공진을 구분한다.",
+      "theory": "물림 주파수(Gear mesh frequency)는 한 축의 치가 맞물리는 반복 주파수다. 소음 증가의 원인은 전달 오차, 치면 접촉, 구조 응답, 베어링과 윤활 등 다양하다. 주파수 일치만으로 원인을 확정하지 않는다.",
+      "formula": {
+        "expression": "f_mesh = zn/60",
+        "definitions": "f: Hz, n: rpm, z: 해당 축 기어 잇수. 정상 회전의 운동학 반복 주파수."
+      },
+      "diagram": "spectrum",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "z=30, n=1200 rpm → f_mesh=600 Hz",
+          "축 회전 주파수=20 Hz; 600 Hz 주위 sideband를 관측하더라도 원인은 추가 검증"
+        ]
+      },
+      "application": "속도·부하별 스펙트럼, 윤활/온도, 치면 흔적과 계측 결과를 비교한다.",
+      "limitations": "교육 사례는 합성 데이터이며 실장비 경보 임계값이 아니다.",
+      "mistakes": [
+        "600 Hz 피크면 반드시 치형 불량이라고 결론낸다."
+      ],
+      "prerequisites": [
+        "p6-l5"
+      ],
+      "legacyRefs": [
+        3
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "소음 주파수와 운전 조건을 이용해 원인 후보를 비교한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Recall",
+        "prompt": "600 Hz 피크에서 먼저 세울 판단은?",
+        "choices": [
+          "물림 관련 가진 가능성, 추가 데이터 필요",
+          "치형 불량 확정",
+          "베어링 정상 확정"
+        ],
+        "answer": 0,
+        "reasons": [
+          "주파수는 단서이지 고장 증명이 아니다.",
+          "구조 공진·윤활·전달 오차 등을 비교해야 한다.",
+          "베어링 상태를 배제하지 못한다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "30T,1200 rpm의 물림 주파수",
+        "answer": 600,
+        "unit": "Hz",
+        "tolerance": 0.1,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "30×1200/60=600 Hz"
+      },
+      "diagnosis": {
+        "title": "물림 주파수 주변 소음",
+        "observations": "30T 축 1200 rpm에서 600 Hz 성분이 증가. 같은 부하에서 냉간/열간 차이도 관찰. 모든 수치는 교육용 합성값.",
+        "hypotheses": [
+          "치면 전달 오차/접촉 변화",
+          "온도·윤활 상태 변화",
+          "구조 공진/베어링 영향"
+        ],
+        "checks": [
+          "한 주파수 피크만으로 치형 불량 확정",
+          "속도·부하·온도를 맞춘 스펙트럼 비교",
+          "치형·치선·접촉 흔적과 윤활 조건 확인",
+          "로그 없이 서보 파라미터 변경"
+        ],
+        "requiredChecks": [
+          1,
+          2
+        ],
+        "reasons": [
+          "주파수 일치는 원인 확정의 충분조건이 아니다.",
+          "운전 조건과 측정 정의를 맞춰 비교해야 한다.",
+          "기어 품질과 다른 시스템 영향을 함께 좁힐 수 있다.",
+          "제조사 승인·증거 없이 변경하는 것은 확인 절차가 아니다."
+        ],
+        "steps": [
+          "안전 상태·증거·측정 정의 확인",
+          "기준 조건 재현과 가설별 비교",
+          "제조사 승인 범위의 확인/한 변수 검증",
+          "동일 조건 재측정과 도면 기준 판정"
+        ],
+        "order": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "caveat": "관측은 합성 사례입니다. 특정 장비의 고장 확정·조작 지시가 아닙니다."
+      }
+    },
+    {
+      "id": "p7-l2",
+      "part": 7,
+      "chapter": "p7-c1",
+      "title": "백래시·중심거리 사례 | Backlash case",
+      "objectives": [
+        "중심거리 변화와 치두께·기준축 가설을 비교한다."
+      ],
+      "context": "조립 후 반전 유격이 늘어난 경우의 조사 계획을 세운다.",
+      "theory": "중심거리 증가가 외접 인벌류트 쌍의 원주 백래시를 증가시키는 경향이 있다. 작은 변화에서는 작동 압력각을 거의 일정하게 보고 선형 근사할 수 있다. 치두께 감량·마모·베어링 유격도 별도 원인이다.",
+      "formula": {
+        "expression": "Δj_t ≈ 2Δa_w tan α_w",
+        "definitions": "Δj_t,Δa_w: mm, α_w: 기존 작동 압력각. 외접 평기어·작은 중심거리 변화·치두께 일정의 1차 근사."
+      },
+      "diagram": "backlash",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "Δa_w=0.05 mm, α_w=20° → Δj_t≈0.03640 mm",
+          "실측 증가 0.09 mm라면 중심거리만으로 설명되지 않는 잔여 약 0.0536 mm"
+        ]
+      },
+      "application": "온도·축 유격·치두께·원주 측정 반경을 비교한다.",
+      "limitations": "큰 중심거리 변화와 헬리컬의 3차원 측정에는 상세 모델이 필요하다.",
+      "mistakes": [
+        "유격 증가를 전부 중심거리 변화로 돌린다."
+      ],
+      "prerequisites": [
+        "p7-l1"
+      ],
+      "legacyRefs": [
+        3
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "중심거리 변화와 치두께·기준축 가설을 비교한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Understanding",
+        "prompt": "예측보다 유격 증가가 크면?",
+        "choices": [
+          "모듈 변경",
+          "치두께·마모·축 유격·측정 조건 비교",
+          "중심거리 원인만 확정"
+        ],
+        "answer": 1,
+        "reasons": [
+          "원인 조사 없이 설계 변경할 수 없다.",
+          "여러 성분을 비교해야 한다.",
+          "모델과 관측의 차이를 무시한다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "Δa=0.05 mm,α_w=20°의 백래시 증가 근사",
+        "answer": 0.0364,
+        "unit": "mm",
+        "tolerance": 0.0001,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "2×0.05tan20°≈0.03640 mm"
+      },
+      "diagnosis": {
+        "title": "반전 유격 증가",
+        "observations": "중심거리 증가 0.05 mm, 작동 압력각 20°에서 원주 유격 증가 실측 0.09 mm. 동일 조건 여부는 아직 확인되지 않음.",
+        "hypotheses": [
+          "중심거리 증가",
+          "치두께 감량 또는 마모",
+          "축·베어링 유격/측정 방향"
+        ],
+        "checks": [
+          "0.09 mm 전부를 중심거리 영향으로 보고",
+          "측정 없이 기어 모듈 변경",
+          "측정 원·고정 조건·온도를 통일해 반복 측정",
+          "중심거리·치두께·축 유격을 독립 확인"
+        ],
+        "requiredChecks": [
+          2,
+          3
+        ],
+        "reasons": [
+          "모델보다 큰 관측 잔여를 무시한다.",
+          "설계 변경은 원인 확인이 아니다.",
+          "같은 백래시 정의로 비교하는 첫 확인이다.",
+          "1차 근사 약 0.0364 mm 외의 성분을 비교한다."
+        ],
+        "steps": [
+          "안전 상태·증거·측정 정의 확인",
+          "기준 조건 재현과 가설별 비교",
+          "제조사 승인 범위의 확인/한 변수 검증",
+          "동일 조건 재측정과 도면 기준 판정"
+        ],
+        "order": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "caveat": "관측은 합성 사례입니다. 특정 장비의 고장 확정·조작 지시가 아닙니다."
+      }
+    },
+    {
+      "id": "p7-l3",
+      "part": 7,
+      "chapter": "p7-c1",
+      "title": "치형·치선 편차 사례 | Deviation case",
+      "objectives": [
+        "편차 패턴과 가공/계측 기준을 비교하여 확인 순서를 선택한다."
+      ],
+      "context": "기울기·곡률·주기 편차를 각기 다른 가설에 연결한다.",
+      "theory": "합성 데이터에서 치형은 안정, 치선 기울기는 양 치면에서 변하고 재척킹 후 감소한다고 가정한다. 고정면·정렬은 유력 가설이지만 공구와 온도 영향도 비교해야 한다. 동일 기준 재현성이 원인 분리의 출발점이다.",
+      "formula": {
+        "expression": "ΔR = R_after − R_before",
+        "definitions": "R: 같은 평가 범위의 교육용 표본 편차 범위(μm), 규격 평가값과 구분."
+      },
+      "diagram": "metrology",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "치선 표본 범위: 전 14 μm, 재척킹 후 6 μm → ΔR=−8 μm",
+          "반복 재척킹 결과와 기준면 검사로 고정 영향 가설 확인"
+        ]
+      },
+      "application": "치선 그래프와 치면·축 좌표, 공구/공작물 고정 이력을 연결한다.",
+      "limitations": "재척킹으로 감소해도 원인 확정은 아니다; 온도·프로브·조건 변화 통제 필요.",
+      "mistakes": [
+        "치선 편차를 보자마자 치형 보정값을 변경한다."
+      ],
+      "prerequisites": [
+        "p7-l2"
+      ],
+      "legacyRefs": [
+        3
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "편차 패턴과 가공/계측 기준을 비교하여 확인 순서를 선택한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Application",
+        "prompt": "가장 먼저 비교할 증거는?",
+        "choices": [
+          "알람 없는 서보 교체",
+          "다른 규격의 합격 값",
+          "동일 온도·기준의 재척킹 반복 결과"
+        ],
+        "answer": 2,
+        "reasons": [
+          "교체 근거가 부족하다.",
+          "정의가 다른 값은 직접 비교할 수 없다.",
+          "고정 조건의 영향을 재현 확인한다."
+        ]
+      },
+      "diagnosis": {
+        "title": "치선 기울기와 재척킹",
+        "observations": "치형 안정, 치선 표본 범위 14 μm. 재척킹 후 6 μm로 감소. 측정 온도와 공구 사용량 기록은 불완전.",
+        "hypotheses": [
+          "고정면/축 정렬 영향",
+          "온도 변화",
+          "계측 기준/프로브 또는 공구 영향"
+        ],
+        "checks": [
+          "기준면·계측 상태·공구 이력 비교",
+          "재척킹 1회 결과로 척 불량 확정",
+          "치선 결과만 보고 치형 보정값 변경",
+          "같은 온도·기준으로 재척킹 반복 측정"
+        ],
+        "requiredChecks": [
+          0,
+          3
+        ],
+        "reasons": [
+          "대안 가설을 제거하려면 독립 증거가 필요하다.",
+          "통제되지 않은 조건이 섞일 수 있다.",
+          "치형·치선은 다른 평가 항목이다.",
+          "반복 재현으로 고정 영향 가설을 검토한다."
+        ],
+        "steps": [
+          "안전 상태·증거·측정 정의 확인",
+          "기준 조건 재현과 가설별 비교",
+          "제조사 승인 범위의 확인/한 변수 검증",
+          "동일 조건 재측정과 도면 기준 판정"
+        ],
+        "order": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "caveat": "관측은 합성 사례입니다. 특정 장비의 고장 확정·조작 지시가 아닙니다."
+      }
+    },
+    {
+      "id": "p7-l4",
+      "part": 7,
+      "chapter": "p7-c2",
+      "title": "공구 마모와 열처리 후 품질 | Wear & distortion case",
+      "objectives": [
+        "공구 사용량 추세와 열처리 전후 변화를 분리한다."
+      ],
+      "context": "치형 변화의 발생 시점을 좁혀 재작업과 공구 교환 판단을 돕는다.",
+      "theory": "공구 마모가 진행되면 절삭력·열·표면 품질이 변할 수 있다. 열처리 후 변형은 별도 발생 구간이다. 부품 ID별 절삭 전후와 열처리 전후 계측을 연결하여 추세와 변곡점을 본다.",
+      "formula": {
+        "expression": "slope = (M₂−M₁)/(N₂−N₁)",
+        "definitions": "M: 같은 평가값 μm, N: 가공 부품 수. 두 점 선형 추세 예시로 인과·수명 예측을 보증하지 않음."
+      },
+      "diagram": "trend",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "N₁=10, M₁=3 μm; N₂=50, M₂=7 μm",
+          "기울기=(7−3)/40=0.1 μm/부품",
+          "열처리 후 갑자기 15 μm라면 마모 추세와 별도 공정 영향 비교"
+        ]
+      },
+      "application": "공구 관찰·부하 로그·동일 부품 전후 검사와 기준면 상태를 기록한다.",
+      "limitations": "고정 교환 주기나 열처리 보정값을 이 예제로 정하지 않는다.",
+      "mistakes": [
+        "열처리 후 불량을 전부 공구 수명 탓으로 돌린다."
+      ],
+      "prerequisites": [
+        "p7-l3"
+      ],
+      "legacyRefs": [
+        3
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "공구 사용량 추세와 열처리 전후 변화를 분리한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Diagnosis",
+        "prompt": "열처리 직후 편차가 급증하면?",
+        "choices": [
+          "동일 부품 전후/온도/기준과 마모 추세 비교",
+          "즉시 공구 원인 확정",
+          "열처리 검사 생략"
+        ],
+        "answer": 0,
+        "reasons": [
+          "발생 시점과 조건을 분리한다.",
+          "시간 상관은 인과 확정이 아니다.",
+          "검사는 가설을 확인하는 핵심 증거다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "10번째3 μm,50번째7 μm의 두 점 기울기",
+        "answer": 0.1,
+        "unit": "μm/부품",
+        "tolerance": 0.001,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "(7−3)/(50−10)=0.1 μm/부품"
+      },
+      "diagnosis": {
+        "title": "마모 추세와 열처리 변곡",
+        "observations": "부품 10/50개째 가공 후 지표 3/7 μm. 50번째 부품이 열처리 후 15 μm. 기준축이 동일한지 미확인.",
+        "hypotheses": [
+          "공구 마모 누적",
+          "열처리 변형",
+          "온도/기준축 변화에 의한 계측 차이"
+        ],
+        "checks": [
+          "계측 기준을 바꾸어 값을 낮추기",
+          "동일 부품 ID의 열처리 전후 측정 조건 비교",
+          "공구 관찰·부하 추세와 재현 계측 확인",
+          "열처리 후 값만으로 공구 마모 확정"
+        ],
+        "requiredChecks": [
+          1,
+          2
+        ],
+        "reasons": [
+          "평가 조건 변경은 품질 개선 증거가 아니다.",
+          "발생 공정과 조건 효과를 분리한다.",
+          "마모 추세에 독립 증거를 추가한다.",
+          "별도 공정의 급증을 설명하지 못한다."
+        ],
+        "steps": [
+          "안전 상태·증거·측정 정의 확인",
+          "기준 조건 재현과 가설별 비교",
+          "제조사 승인 범위의 확인/한 변수 검증",
+          "동일 조건 재측정과 도면 기준 판정"
+        ],
+        "order": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "caveat": "관측은 합성 사례입니다. 특정 장비의 고장 확정·조작 지시가 아닙니다."
+      }
+    },
+    {
+      "id": "p7-l5",
+      "part": 7,
+      "chapter": "p7-c2",
+      "title": "동기 이상·조건 변경 검증 | Change validation",
+      "objectives": [
+        "가설별 증거와 통제된 변경·검증 계획을 작성한다."
+      ],
+      "context": "고속 가공 변경 후 품질 악화에 대한 통합 FSE 판단이다.",
+      "theory": "가상 사례: 회전수 증가 후 누적 피치의 주기 편차와 동기 오차가 함께 증가한다. 동기·강성·열·공구 가설을 비교한다. 승인 범위 내 한 변수 변경과 동일 부품/기준의 재검증으로 관계를 확인한다.",
+      "formula": {
+        "expression": "ΔM = M_new − M_baseline; relative change = ΔM/M_baseline",
+        "definitions": "M: 동일 평가 항목·단위. 기준값 0이면 상대 변화 정의 불가. 모든 숫자는 교육용 합성값."
+      },
+      "diagram": "diagnosis",
+      "example": {
+        "title": "계산을 따라가기 · Worked example",
+        "steps": [
+          "가상 기본 피치 지표 8 μm, 변경 후 12 μm → ΔM=4 μm",
+          "상대 증가=4/8=50%; 도면 공차를 확인하기 전 합격/불합격은 미정"
+        ]
+      },
+      "application": "검증 계획에 기준 조건·변수·예상 위험·로그·샘플 수 근거·합격 기준·승인된 복구 방법을 포함한다.",
+      "limitations": "앱은 NC/서보 파라미터 변경 처방을 제공하지 않는다. 실제 변경은 제조사와 현장 승인 체계로 수행한다.",
+      "mistakes": [
+        "동시에 속도·이송·동기 보정을 바꾸고 단일 원인을 주장한다."
+      ],
+      "prerequisites": [
+        "p7-l4"
+      ],
+      "legacyRefs": [
+        3
+      ],
+      "sources": [
+        "dudley",
+        "oem"
+      ],
+      "review": {
+        "status": "technical-review-pending",
+        "publicationReady": false
+      },
+      "exercise": {
+        "prompt": "가설별 증거와 통제된 변경·검증 계획을 작성한다. 예제의 가정이 달라졌을 때 필요한 추가 정보를 두 가지 적으세요.",
+        "rubric": [
+          "정의와 단위를 명시한다.",
+          "적용 전제와 추가 확인 데이터를 연결한다.",
+          "관측과 원인 가설을 구분한다."
+        ]
+      },
+      "assessment": {
+        "type": "choice",
+        "ability": "Diagnosis",
+        "prompt": "조건 변경 검증의 적절한 설계는?",
+        "choices": [
+          "알람 임계값을 올려 검증",
+          "승인 범위 한 변수 변경, 로그/품질 비교, 도면 기준 검증",
+          "전체 변수 변경 후 시간만 확인"
+        ],
+        "answer": 1,
+        "reasons": [
+          "관측을 숨기는 것은 검증이 아니다.",
+          "영향 분리와 최종 성능 확인을 함께 수행한다.",
+          "원인 분리가 불가능하다."
+        ]
+      },
+      "calculation": {
+        "type": "number",
+        "ability": "Calculation",
+        "prompt": "지표8→12 μm의 상대 증가율",
+        "answer": 50,
+        "unit": "%",
+        "tolerance": 0.01,
+        "rounding": "최소 소수 4자리까지 중간값을 유지하고 최종 답을 허용 오차 안으로 반올림한다.",
+        "explanation": "(12−8)/8×100=50%"
+      },
+      "diagnosis": {
+        "title": "속도 변경 후 주기 피치 편차",
+        "observations": "속도 변경 후 같은 평가 지표 8→12 μm. 순간 동기 편차도 증가하지만 온도/부하 변동이 함께 관찰.",
+        "hypotheses": [
+          "순간 동기 추종 문제",
+          "열·강성·하중의 영향",
+          "공구/계측 조건 변화"
+        ],
+        "checks": [
+          "시간 정렬된 동기·부하·온도 로그와 치 위치 비교",
+          "승인된 기준 조건 복귀/한 변수 비교 계획과 동일 기준 검사",
+          "알람 임계값을 높여 정상 처리",
+          "여러 조건을 동시에 바꾸고 단일 원인 확정"
+        ],
+        "requiredChecks": [
+          0,
+          1
+        ],
+        "reasons": [
+          "상관을 확인하고 대안 원인을 분리한다.",
+          "제조사 승인 범위에서 재현·영향 분리·판정을 연결한다.",
+          "감지 조건 변경은 품질 검증이 아니다.",
+          "한 변수의 영향을 구분할 수 없다."
+        ],
+        "steps": [
+          "안전 상태·증거·측정 정의 확인",
+          "기준 조건 재현과 가설별 비교",
+          "제조사 승인 범위의 확인/한 변수 검증",
+          "동일 조건 재측정과 도면 기준 판정"
+        ],
+        "order": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "caveat": "관측은 합성 사례입니다. 특정 장비의 고장 확정·조작 지시가 아닙니다."
+      },
+      "theoryParagraphs": [
+        "속도를 올린 뒤 동기 편차와 피치 지표가 함께 증가했다고 해서 동기 오차가 유일한 원인이라고 결론낼 수 없다. 부하와 온도도 동시에 변했다면 각 가설의 예측과 독립 확인 데이터를 먼저 명시한다.",
+        "변경 검증 계획에는 기준 조건, 변경할 한 변수, 예상 품질/공구/열 위험, 기록할 지표, 승인된 시험 범위, 샘플 수의 근거, 도면 판정 규칙과 복구 조건을 포함한다. 통계적 수용성이나 공정 능력은 두 샘플만으로 주장하지 않는다."
+      ]
+    }
+  ]
+}

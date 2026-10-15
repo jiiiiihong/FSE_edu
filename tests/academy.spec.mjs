@@ -11,7 +11,7 @@ async function openTab(page,tab){
 }
 
 test.beforeEach(async ({page})=>{
- await page.goto('/');
+ await page.goto('/legacy.html');
  await expect(page.locator('#app')).not.toContainText('학습 자료를 불러오는 중입니다.');
 });
 test('initial load and no runtime exceptions',async ({page})=>{
@@ -154,25 +154,17 @@ test('every DUMPE phase is present in every chapter',async ({page})=>{
   await expect(unit.locator('button[data-openquiz]')).toBeVisible();
  }
 });
-test('all 58 glossary cards open and reveal their definitions',async ({page})=>{
- const expected=[8,9,8,9,8,8,8];
- const units=page.locator('details[data-unit]');
- let total=0;
- for(let i=0;i<7;i++){
-  const unit=units.nth(i);
+for(const [unitIndex,count] of [8,9,8,9,8,8,8].entries()){
+ test('legacy glossary unit '+(unitIndex+1)+': all '+count+' definitions open',async({page})=>{
+  const unit=page.locator('details[data-unit]').nth(unitIndex);
   await unit.locator('summary').first().click();
-  const cards=unit.locator('details.term');
-  await expect(cards).toHaveCount(expected[i]);
-  for(let j=0;j<expected[i];j++){
-   const card=cards.nth(j);
-   await card.locator('summary').click();
-   await expect(card).toHaveAttribute('open','');
-   await expect(card.locator('p')).not.toBeEmpty();
-   total++;
+  const cards=unit.locator('details.term');await expect(cards).toHaveCount(count);
+  for(let i=0;i<count;i++){
+   const card=cards.nth(i);await card.locator('summary').click();
+   await expect(card).toHaveAttribute('open','');await expect(card.locator('p')).not.toBeEmpty();
   }
- }
- expect(total).toBe(58);
-});
+ });
+}
 test('all 36 quiz questions have visible choices and grading feedback',async ({page})=>{
  await openTab(page,'quiz');
  const seen=new Set();

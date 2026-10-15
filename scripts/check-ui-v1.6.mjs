@@ -1,6 +1,6 @@
 import {readFileSync} from 'node:fs';import {Script} from 'node:vm';import assert from 'node:assert/strict';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
-const html=read('index.html'),css=read('ui-v1.6.css'),nav=read('navigation-v1.6.js'),ai=read('ai-dictionary.js'),dictionary=read('dictionary.js');
+const html=read('legacy.html'),css=read('ui-v1.6.css'),nav=read('navigation-v1.6.js'),ai=read('ai-dictionary.js'),dictionary=read('dictionary.js');
 for(const p of ['navigation-v1.6.js','ai-dictionary.js','dictionary.js'])new Script(read(p),{filename:p});
 assert.match(html,/href="ui-v1\.6\.css\?v=160"/);
 assert.match(html,/src="navigation-v1\.6\.js\?v=160"/);

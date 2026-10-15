@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
 test('homepage loads', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/legacy.html');
   await expect(page.locator('h1')).toContainText('FSE Gear Academy');
   await expect(page.locator('nav .fse-more')).toBeVisible();
 });
 test('more menu opens quiz and returns to calculator', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/legacy.html');
   await page.locator('nav .fse-more').click();
   await expect(page.locator('#fse-more-menu')).toBeVisible();
   await page.locator('#fse-more-menu button').first().click();
@@ -16,7 +16,7 @@ test('more menu opens quiz and returns to calculator', async ({ page }) => {
 for (const width of [320, 375, 390, 430]) {
   test('no horizontal overflow at '+width, async ({ page }) => {
     await page.setViewportSize({width,height:800});
-    await page.goto('/');
+    await page.goto('/legacy.html');
     await expect.poll(async () => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   });
 }
@@ -29,7 +29,7 @@ test('AI dictionary saved explanation is preserved', async ({ page }) => {
       related:['Hobbing'],caveat:'설정 확인',memo:'보존 메모',reviewed:true
     }]));
   });
-  await page.goto('/');
+  await page.goto('/legacy.html');
   await page.locator('#dictFab').click();
   await page.locator('.ai14-tabs button').filter({hasText:'내 용어장'}).click();
   await page.locator('.ai14-shelf button').filter({hasText:'Hobbing cutter'}).click();

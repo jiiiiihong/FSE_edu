@@ -1,4 +1,4 @@
-name: FSE v1.6 browser tests
+name: Legacy v1.6 Chromium regression
 on:
   pull_request:
   workflow_dispatch:
@@ -12,11 +12,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm install
+      - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run test:syntax
       - run: node scripts/check-ui-v1.6.mjs
-      - run: npm run test:e2e
+      - run: npm run test:e2e -- tests/academy.spec.mjs tests/v16-smoke.spec.js --project=chromium-desktop --project=mobile-chromium
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -1,0 +1,70 @@
+{
+  "fullRun": {
+    "startTime": "2026-10-13T09:50:03.140Z",
+    "duration": 601979.37,
+    "expected": 214,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  },
+  "retainedTests": {
+    "count": 212,
+    "passed": 212,
+    "explanation": "The four monolithic glossary tests are superseded by seven per-unit tests per project; remaining full-run tests all passed."
+  },
+  "targetedRun": {
+    "status": "superseded by successful complete 244-case CI run"
+  },
+  "finalCI": {
+    "date": "2026-10-15",
+    "commit": "21c20e0a2cbed507924cdb56598d4f4551c7f88f",
+    "run": "https://github.com/jiiiiihong/FSE_edu/actions/runs/38726375297",
+    "nodeTests": {
+      "passed": 20,
+      "failed": 0
+    },
+    "browserTests": {
+      "passed": 244,
+      "failed": 0,
+      "projects": [
+        "chromium-desktop",
+        "mobile-chromium",
+        "webkit-desktop",
+        "mobile-webkit"
+      ]
+    }
+  },
+  "liveSmoke": {
+    "url": "https://fse-gear-academy-v2.onrender.com",
+    "results": [
+      {
+        "project": "desktop",
+        "passed": true,
+        "checks": [
+          "7 parts",
+          "chapter/lesson routing",
+          "numeric assessment",
+          "completion persistence",
+          "helical calculator",
+          "dictionary",
+          "no overflow",
+          "no JS exceptions"
+        ]
+      },
+      {
+        "project": "mobile",
+        "passed": true,
+        "checks": [
+          "7 parts",
+          "chapter/lesson routing",
+          "numeric assessment",
+          "completion persistence",
+          "helical calculator",
+          "dictionary",
+          "no overflow",
+          "no JS exceptions"
+        ]
+      }
+    ]
+  }
+}
