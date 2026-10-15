@@ -1,5 +1,9 @@
 # FSE Gear Academy v2
 
+[Open the running v2 preview](https://fse-gear-academy-v2.onrender.com) · [PR #10](https://github.com/jiiiiihong/FSE_edu/pull/10)
+
+Verified: 20 Node tests, 244 desktop/mobile Chromium/WebKit tests, and desktop/mobile smoke tests against the public preview.
+
 Static engineering learning platform for Korean-speaking engineers and new Field Service Engineers: 7 PARTs, 14 chapters, 35 lessons, 62 objective evaluation tasks and 35 saved written exercises.
 
 The curriculum is a **technical-review draft**. Standard tables and OEM-specific alarm/parameter instructions are not fabricated. Each lesson exposes sources, assumptions, limits and publication status.

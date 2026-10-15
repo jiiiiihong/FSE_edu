@@ -2,6 +2,14 @@
 
 Branch: `feature/gear-academy-v2-engineering`.
 
+PR: https://github.com/jiiiiihong/FSE_edu/pull/10
+
+**Running preview:** https://fse-gear-academy-v2.onrender.com
+
+Render service `srv-db8bdmvavr4c73atib5g`, user-selected My Workspace. Manual deployment from the feature branch; auto-deploy off. Main/Pages/Worker remain unchanged. Application commit `21c20e0a2cbed507924cdb56598d4f4551c7f88f` passed 20 Node and 244 cross-browser tests, plus desktop/mobile checks against the public URL. Later documentation-only commits do not alter those tested app assets.
+
+The preview is a different origin: existing production browser data stays at its original origin and is not automatically transferred. New AI searches against the existing Worker were not live-validated on this preview; basic dictionary and browser-local records are verified.
+
 This is a reviewable engineering-academy implementation. **Do not merge main or deploy Pages/Worker without the user's final approval.** GitHub Pages currently publishes `main`, `/`; all added workflows only verify/package artifacts.
 
 ## Implemented scope

@@ -19,7 +19,15 @@ Date: 2026-10-13. Baseline: v1.6 `3f7456f`. Candidate: `feature/gear-academy-v2-
 - JavaScript/HTML/JSON syntax: PASS.
 - Retained v1.6 static checks: PASS.
 - Node tests: **20 passed, 0 failed** (final local execution).
-- Four-project browser suite on 2026-10-13: **214 passed / 216 total**, 2 timeouts in the monolithic 58-card legacy glossary checks on WebKit. All v2 functional/accessibility tests passed in all four projects. The legacy glossary tests are now split into seven unit-scoped tests (same 58 entries); the final skip-link test is also included. Updated suite: 244 cases; CI execution pending. See `qa-results.json` for preserved run metadata.
+- Final GitHub Actions four-project suite: **244 passed, 0 failed**, on 2026-10-15 (3.9 minutes).
+- Validated application commit: `21c20e0a2cbed507924cdb56598d4f4551c7f88f`.
+- CI evidence: https://github.com/jiiiiihong/FSE_edu/actions/runs/38726375297
+- Legacy Chromium regression and v1.6 static checks: PASS in separate jobs.
+- Live Render browser smoke: desktop 1440×1000 and mobile 390×844 both PASS. Confirmed 7 PARTs, chapter/lesson routes, numeric grading, saved completion after reload, helical calculator, built-in dictionary, no horizontal overflow and no JavaScript exceptions.
+- Live root, curriculum (35 lessons), JS modules, CSS, legacy app and dictionaries: HTTP 200 with correct content types.
+- Published URL: https://fse-gear-academy-v2.onrender.com
+
+The earlier 214/216 local result is preserved in `qa-results.json`. Its two WebKit timeouts were confined to a single long 58-card test. Seven per-unit tests now cover the same entries and pass in all four CI projects.
 
 Earlier Chromium run: 98/102 passed. A responsive grid minimum width issue was fixed; two corrupt-state tests were corrected to reload after injecting persisted data. Targeted recheck: 12/12 passed. Earlier four-project run: 188/208 passed; long multi-step tests hit 30 s limits under four-worker contention. Final configuration uses two workers and 90 s per test. These earlier runs are diagnostic evidence, not the final acceptance result.
 
@@ -35,4 +43,4 @@ KHK Technical Reference index, Involute Gear Profile and Calculation of Gear Dim
 
 Corrected the worked example of a 60→61 mm center distance at 20° to α_w=22.4388°. Contact example ε_α=1.6351859636 was independently calculated. Diagrams distinguish computed curves/circles from conceptual blocks; no illustrative polygon is claimed to be a manufactured involute tooth. Sample graphs and case values are explicitly synthetic, with no invented ISO tolerance limits.
 
-No physical Safari/VoiceOver test, paid AI API call, live Worker deployment, main merge or production publication occurred. Production localStorage was not read or modified. Browser-local data tests use isolated local contexts.
+No physical Safari/VoiceOver test, paid AI API call, live Worker deployment or main merge occurred. A separate public Render preview was published with the user’s authorization; the existing production Pages site is unchanged. Production localStorage was not read or modified. Browser-local data tests use isolated local contexts.
